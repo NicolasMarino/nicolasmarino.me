@@ -5,7 +5,7 @@ export const projects: Project[] = [
     title: 'Proyecto Lorem Ipsum',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    tags: ['Lorem.js', 'Ipsum', 'Dolor CSS'],
+    tags: ['Lorem.js', 'Ipsum', 'jjjj'],
     link: 'https://github.com/loremipsum',
   },
   {
