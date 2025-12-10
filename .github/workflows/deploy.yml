@@ -3,11 +3,12 @@ name: Deploy to Cloudflare Pages
 on:
   push:
     branches:
-      - [main, feature/v0]
+      - main
+      - feature/v0
   pull_request:
     branches:
-      - [main, feature/v0]
-
+      - main
+      - feature/v0
 jobs:
   deploy:
     runs-on: ubuntu-latest
