@@ -15,26 +15,23 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
   const post = getPostBySlug(slug);
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="blog-page">
       {/* Hero Banner */}
-      <div className="relative w-full h-[300px] md:h-[400px] overflow-hidden">
+      <div className="blog-detail-hero">
         <Image
           src={post.image || '/images/blog-cover-default.png'}
           alt={post.title}
           fill
-          className="object-cover"
+          className="blog-detail-hero-image"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+        <div className="blog-detail-hero-overlay" />
       </div>
 
       {/* Content Container */}
-      <div className="max-w-3xl mx-auto px-6 -mt-32 relative z-10">
+      <div className="blog-detail-container">
         {/* Back Link */}
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
-        >
+        <Link href="/blog" className="blog-back-link">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -52,15 +49,12 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         </Link>
 
         {/* Article Header */}
-        <header className="mb-8 space-y-4">
+        <header className="blog-detail-header">
           {/* Tags */}
           {post.tags && post.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2">
+            <div className="blog-detail-tags">
               {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 text-xs font-medium rounded-full bg-foreground/10 text-foreground"
-                >
+                <span key={tag} className="blog-card-tag">
                   {tag}
                 </span>
               ))}
@@ -68,13 +62,11 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           )}
 
           {/* Title */}
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-tight">
-            {post.title}
-          </h1>
+          <h1 className="blog-detail-title">{post.title}</h1>
 
           {/* Meta Info */}
-          <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-            <time dateTime={post.date} className="flex items-center gap-2">
+          <div className="blog-detail-meta">
+            <time dateTime={post.date} className="blog-detail-meta-item">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -97,7 +89,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                 day: 'numeric',
               })}
             </time>
-            <span className="flex items-center gap-2">
+            <span className="blog-detail-meta-item">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -117,43 +109,21 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           </div>
 
           {/* Description */}
-          {post.description && (
-            <p className="text-lg text-muted-foreground leading-relaxed border-l-4 border-foreground/20 pl-4 italic">
-              {post.description}
-            </p>
-          )}
+          {post.description && <p className="blog-detail-description">{post.description}</p>}
         </header>
 
         {/* Divider */}
-        <hr className="border-border mt-8 mb-16" />
+        <hr className="blog-detail-divider" />
 
         {/* Article Content */}
-        <article
-          className="prose prose-neutral dark:prose-invert max-w-none
-          prose-headings:font-bold prose-headings:tracking-tight
-          prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
-          prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-          prose-p:text-muted-foreground prose-p:leading-relaxed
-          prose-a:text-foreground prose-a:underline prose-a:underline-offset-4 hover:prose-a:text-foreground/80
-          prose-strong:text-foreground prose-strong:font-semibold
-          prose-code:text-foreground prose-code:bg-foreground/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
-          prose-pre:bg-foreground/5 prose-pre:border prose-pre:border-border
-          prose-ul:text-muted-foreground prose-ol:text-muted-foreground
-          prose-li:marker:text-foreground/50
-          prose-blockquote:border-l-foreground/30 prose-blockquote:text-muted-foreground prose-blockquote:italic
-          prose-hr:border-border
-        "
-        >
+        <article className="prose max-w-none">
           <MDXRemote source={post.content || ''} />
         </article>
 
         {/* Footer */}
-        <footer className="mt-24 pt-12 border-t border-border">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-foreground text-background text-sm font-medium hover:bg-foreground/90 transition-colors"
-            >
+        <footer className="blog-detail-footer">
+          <div className="blog-detail-footer-content">
+            <Link href="/blog" className="btn-base btn-primary">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -169,13 +139,13 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
               </svg>
               Ver más artículos
             </Link>
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-muted-foreground">Compartir:</span>
+            <div className="blog-detail-share">
+              <span className="blog-detail-share-label">Compartir:</span>
               <a
                 href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`https://nicolasmarino.me/blog/${slug}`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg border border-border hover:bg-muted transition-colors"
+                className="blog-detail-share-btn"
                 aria-label="Compartir en Twitter"
               >
                 <svg
@@ -192,7 +162,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                 href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://nicolasmarino.me/blog/${slug}`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg border border-border hover:bg-muted transition-colors"
+                className="blog-detail-share-btn"
                 aria-label="Compartir en LinkedIn"
               >
                 <svg
@@ -210,7 +180,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         </footer>
 
         {/* Spacer */}
-        <div className="h-24" />
+        <div className="blog-detail-spacer" />
       </div>
     </main>
   );
