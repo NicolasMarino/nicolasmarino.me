@@ -1,0 +1,45 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "projects": "Proyectos",
+    "experience": "Experiencia",
+    "blog": "Blog",
+    "contact": "Contacto",
+    "github": "GitHub",
+    "resume": "Currículum"
+  },
+  "hero": {
+    "greeting": "Lorem, ipsum",
+    "name": "Lorem Ipsum",
+    "role": "Dolor Sit Amet",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "cta": "Lorem Ipsum"
+  },
+  "about": {
+    "title": "Lorem Ipsum",
+    "p1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+    "p2": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
+    "p3": "Sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium."
+  },
+  "projects": {
+    "title": "Lorem Ipsum"
+  },
+  "contact": {
+    "title": "Lorem Ipsum",
+    "description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.",
+    "sendMessage": "Lorem Ipsum",
+    "github": "Dolor",
+    "linkedin": "Sit Amet",
+    "twitter": "Consectetur"
+  },
+  "blog": {
+    "title": "Lorem Ipsum",
+    "viewAll": "Dolor sit →",
+    "minRead": "lorem",
+    "noDescription": "Lorem ipsum dolor sit amet.",
+    "empty": "Lorem ipsum dolor sit amet, consectetur adipiscing elit!"
+  },
+  "language": {
+    "switch": "EN"
+  }
+}
