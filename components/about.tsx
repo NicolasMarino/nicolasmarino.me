@@ -6,9 +6,9 @@ export default function About() {
   const { t } = useLanguage();
 
   return (
-    <section id="about" className="space-y-6">
+    <section id="about">
       <h2 className="text-3xl font-bold tracking-tight">{t('about.title')}</h2>
-      <div className="space-y-4 text-muted-foreground text-lg leading-relaxed">
+      <div className="text-muted-foreground text-lg leading-relaxed">
         <p>{t('about.p1')}</p>
         <p>{t('about.p2')}</p>
         <p>{t('about.p3')}</p>

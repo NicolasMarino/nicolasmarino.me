@@ -19,12 +19,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <p className="font-serif text-lg leading-relaxed mb-6 text-muted-foreground">{children}</p>
     ),
     ul: ({ children }) => (
-      <ul className="list-disc list-inside mb-6 space-y-2 text-muted-foreground ml-4 font-serif">
+      <ul className="list-disc list-inside mb-6 text-muted-foreground ml-4 font-serif">
         {children}
       </ul>
     ),
     ol: ({ children }) => (
-      <ol className="list-decimal list-inside mb-6 space-y-2 text-muted-foreground ml-4 font-serif">
+      <ol className="list-decimal list-inside mb-6 text-muted-foreground ml-4 font-serif">
         {children}
       </ol>
     ),

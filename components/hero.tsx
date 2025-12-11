@@ -17,13 +17,13 @@ export default function Hero() {
         transition={{ duration: 0.5 }}
         className="relative"
       >
-        <div className="w-24 h-24 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 p-1">
+        <div className="w-52 h-52 rounded-full bg-gradient-to-br from-green-200 to-green-600 p-1">
           <div className="w-full h-full rounded-full overflow-hidden bg-background flex items-center justify-center">
             <Image
               src={siteConfig.avatar}
               alt={t('hero.name')}
-              width={96}
-              height={96}
+              width={180}
+              height={180}
               className="w-full h-full object-cover"
               priority
             />
@@ -35,11 +35,8 @@ export default function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="space-y-4"
       >
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-          {t('hero.greeting')}
-          <br />
           <span className="text-foreground">{t('hero.name')}</span>
         </h1>
         <p className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto">

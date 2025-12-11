@@ -10,37 +10,22 @@ export default async function Home() {
   const posts = await getAllPosts();
 
   return (
-    <main
-      style={{
-        minHeight: '100vh',
-        backgroundColor: 'var(--background)',
-        color: 'var(--foreground)',
-        paddingBottom: '8rem',
-      }}
-    >
-      <div
-        style={{
-          maxWidth: '800px',
-          margin: '0 auto',
-          padding: '0 1.5rem',
-          paddingTop: '2rem',
-          paddingBottom: '2rem',
-        }}
-      >
+    <main className="main-page">
+      <div className="main-container">
         <Hero />
-        <div style={{ marginTop: '2rem' }}>
+        <div className="section-spacer-sm">
           <TechIcons />
         </div>
-        <div style={{ marginTop: '5rem' }}>
+        <div className="section-spacer">
           <About />
         </div>
-        <div style={{ marginTop: '5rem' }}>
+        <div className="section-spacer">
           <Projects />
         </div>
-        <div style={{ marginTop: '5rem' }}>
+        <div className="section-spacer">
           <BlogPreview posts={posts} />
         </div>
-        <div style={{ marginTop: '5rem' }}>
+        <div className="section-spacer">
           <Contact />
         </div>
       </div>

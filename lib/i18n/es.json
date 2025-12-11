@@ -9,35 +9,34 @@
     "resume": "Currículum"
   },
   "hero": {
-    "greeting": "Lorem, ipsum",
-    "name": "Lorem Ipsum",
-    "role": "Dolor Sit Amet",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "cta": "Lorem Ipsum"
+    "name": "Nicolás Marino",
+    "role": "Software Developer",
+    "description": "Soy un desarrollador de software con un pasión por crear aplicaciones innovadoras y de fácil uso. Mi experiencia se centra en la creación de sistemas escalables y eficientes que cumplen con las necesidades tanto de los usuarios como de las empresas.",
+    "cta": "Contactame"
   },
   "about": {
-    "title": "Lorem Ipsum",
-    "p1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-    "p2": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-    "p3": "Sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium."
+    "title": "Sobre mí",
+    "p1": "Desarrollador de Software con más de siete años de trayectoria en el diseño e implementación de arquitecturas backend y soluciones basadas en datos. Especializado en Python, Java y TypeScript, convierto grandes volúmenes de información en insights claros para impulsar decisiones estratégicas.",
+    "p2": "Mi fortaleza radica en entornos colaborativos: combino liderazgo técnico y visión analítica para abordar retos complejos y generar alto impacto.",
+    "p3": "Como emprendedor, cofundé Conectándote (https://conectandote.com.uy/), plataforma líder en Uruguay que conecta a estudiantes con oportunidades educativas; y, a través de mi blog @Data For Everyone, difundo buenas prácticas y aprendizajes en Ciencia de Datos."
   },
   "projects": {
-    "title": "Lorem Ipsum"
+    "title": "Proyectos"
   },
   "contact": {
-    "title": "Lorem Ipsum",
-    "description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.",
-    "sendMessage": "Lorem Ipsum",
-    "github": "Dolor",
-    "linkedin": "Sit Amet",
-    "twitter": "Consectetur"
+    "title": "Contacto",
+    "description": "Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarme.",
+    "sendMessage": "Enviar mensaje",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "twitter": "Twitter"
   },
   "blog": {
-    "title": "Lorem Ipsum",
-    "viewAll": "Dolor sit →",
-    "minRead": "lorem",
-    "noDescription": "Lorem ipsum dolor sit amet.",
-    "empty": "Lorem ipsum dolor sit amet, consectetur adipiscing elit!"
+    "title": "Blog",
+    "viewAll": "Ver todo →",
+    "minRead": "min. lectura",
+    "noDescription": "No hay descripción.",
+    "empty": "No hay entradas en el blog."
   },
   "language": {
     "switch": "EN"

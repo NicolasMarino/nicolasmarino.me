@@ -8,7 +8,7 @@ export default function Contact() {
   const { t } = useLanguage();
 
   return (
-    <section id="contact" className="space-y-6">
+    <section id="contact">
       <h2 className="text-3xl font-bold tracking-tight">{t('contact.title')}</h2>
       <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl">
         {t('contact.description')}
