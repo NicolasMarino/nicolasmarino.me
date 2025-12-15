@@ -5,7 +5,7 @@ export const siteConfig = {
   github: 'https://github.com/nicolasmarino',
   linkedin: 'https://www.linkedin.com/in/nicol%C3%A1smarino/',
 
-  avatar: '/avatar.png',
+  avatar: '/avatar.webp',
   resume: '/resume.pdf',
 
   title: 'Nicolas Marino - Software Developer',

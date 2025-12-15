@@ -11,7 +11,7 @@
   "hero": {
     "name": "Nicolás Marino",
     "role": "Software Developer",
-    "description": "Soy un desarrollador de software con un pasión por crear aplicaciones innovadoras y de fácil uso. Mi experiencia se centra en la creación de sistemas escalables y eficientes que cumplen con las necesidades tanto de los usuarios como de las empresas.",
+    "description": "Simplificar | Documentar | Medir",
     "cta": "Contactame"
   },
   "about": {
@@ -25,11 +25,14 @@
   },
   "contact": {
     "title": "Contacto",
-    "description": "Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarme.",
+    "description": "Si querés contactarme:",
     "sendMessage": "Enviar mensaje",
+    "downloadCV": "Descargar CV",
+    "cvPath": "/cv/es.pdf",
+    "cvFilename": "Nicolas-Marino-CV.pdf",
+    "orEmail": "o escríbeme a:",
     "github": "GitHub",
-    "linkedin": "LinkedIn",
-    "twitter": "Twitter"
+    "linkedin": "LinkedIn"
   },
   "blog": {
     "title": "Blog",

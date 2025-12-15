@@ -11,7 +11,7 @@
   "hero": {
     "name": "Nicolás Marino",
     "role": "Software Developer",
-    "description": "I'm a software developer with a passion for creating innovative and user-friendly applications. My expertise lies in building scalable and efficient systems that meet the needs of both users and businesses.",
+    "description": "Simplify | Document | Measure",
     "cta": "Contact me"
   },
   "about": {
@@ -25,11 +25,14 @@
   },
   "contact": {
     "title": "Contact",
-    "description": "If you have any questions or need help, feel free to reach out.",
+    "description": "Feel free to reach out!",
     "sendMessage": "Send message",
+    "downloadCV": "Download CV",
+    "cvPath": "/cv/en.pdf",
+    "cvFilename": "Nicolas-Marino-CV.pdf",
+    "orEmail": "or email me at:",
     "github": "GitHub",
-    "linkedin": "LinkedIn",
-    "twitter": "Twitter"
+    "linkedin": "LinkedIn"
   },
   "blog": {
     "title": "Blog",
