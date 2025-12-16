@@ -1,120 +1,145 @@
 import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
-import { getPostSlugs, getPostBySlug, getAllPosts } from '@/lib/blog';
+import { getPostSlugs, getPostBySlug, getAllPosts, getPostsByLanguage } from '@/lib/blog';
 import fs from 'fs';
 import matter from 'gray-matter';
 
-// Mocks
-// Explicitly mock fs to ensure we get spy functions
-vi.mock('fs', () => {
-  return {
-    default: {
-      readdirSync: vi.fn(),
-      readFileSync: vi.fn(),
-      existsSync: vi.fn(),
-      // Add otherfs methods if needed by implementation
-    },
-  };
-});
+vi.mock('fs', () => ({
+  default: {
+    readdirSync: vi.fn(),
+    readFileSync: vi.fn(),
+    existsSync: vi.fn(),
+  },
+}));
 
-// Mock gray-matter
 vi.mock('gray-matter', () => ({
   default: vi.fn(),
 }));
 
-describe('Blog Utilities', () => {
-  const mockCwd = '/test-cwd';
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.spyOn(process, 'cwd').mockReturnValue('/app');
+});
 
-  beforeEach(() => {
-    vi.clearAllMocks();
-    vi.spyOn(process, 'cwd').mockReturnValue(mockCwd);
+function mockPost(data: Record<string, unknown>, content = 'Some content here') {
+  (matter as unknown as Mock).mockReturnValue({ data, content });
+}
+
+describe('getPostsByLanguage', () => {
+  it('should return posts for the given language', () => {
+    (fs.existsSync as Mock).mockReturnValue(true);
+    (fs.readdirSync as Mock).mockReturnValue(['my-post.mdx']);
+    (fs.readFileSync as Mock).mockReturnValue('');
+    mockPost({ title: 'Mi Post', date: '2025-01-01' });
+
+    const posts = getPostsByLanguage('es');
+
+    expect(posts).toHaveLength(1);
+    expect(posts[0].language).toBe('es');
   });
 
-  describe('getPostSlugs', () => {
-    it('returns a list of filenames from the content directory', () => {
-      const mockFiles = ['post-1.mdx', 'post-2.mdx', 'draft.md'];
-      (fs.readdirSync as Mock).mockReturnValue(mockFiles);
+  it('should return empty when directory does not exist', () => {
+    (fs.existsSync as Mock).mockReturnValue(false);
 
-      const slugs = getPostSlugs();
-
-      expect(fs.readdirSync).toHaveBeenCalledWith(expect.stringContaining('content/blog'));
-      expect(slugs).toEqual(mockFiles);
-    });
+    expect(getPostsByLanguage('es')).toEqual([]);
   });
 
-  describe('getPostBySlug', () => {
-    it('parses post content and metadata correctly', () => {
-      const mockSlug = 'test-post';
-      const mockContent = 'This is the post content with about 10 words here for reading time.';
-      const mockData = {
-        title: 'Test Title',
-        date: '2025-01-01',
-        description: 'Test Description',
-        image: '/test-image.png',
-        tags: ['react', 'testing'],
-      };
+  it('should only include .mdx files', () => {
+    (fs.existsSync as Mock).mockReturnValue(true);
+    (fs.readdirSync as Mock).mockReturnValue(['post.mdx', 'readme.md', 'notes.txt']);
+    (fs.readFileSync as Mock).mockReturnValue('');
+    mockPost({ title: 'Post', date: '2025-01-01' });
 
-      (fs.readFileSync as Mock).mockReturnValue('raw file content');
-      // matter is a function that returns an object { data, content }
-      (matter as unknown as Mock).mockReturnValue({
-        data: mockData,
-        content: mockContent,
-      });
+    expect(getPostsByLanguage('es')).toHaveLength(1);
+  });
+});
 
-      const post = getPostBySlug(mockSlug);
-
-      expect(post.slug).toBe(mockSlug);
-      expect(post.title).toBe(mockData.title);
-      expect(post.readTime).toBe(1); // 10 words < 200
-      expect(post.tags).toEqual(mockData.tags);
-      // We rely on real path.join behavior which should produce consistent paths
-      expect(fs.readFileSync).toHaveBeenCalledWith(
-        expect.stringMatching(/test-post\.mdx$/),
-        'utf8',
-      );
+describe('getPostBySlug', () => {
+  it('should find a post by slug', () => {
+    (fs.existsSync as Mock).mockImplementation((p: string) => p.includes('/es/'));
+    (fs.readFileSync as Mock).mockReturnValue('');
+    mockPost({
+      title: 'Test Post',
+      date: '2025-01-01',
+      description: 'A test',
+      image: '/img.png',
+      tags: ['react'],
     });
 
-    it('uses defaults when optional fields are missing', () => {
-      const mockSlug = 'minimal-post';
-      (fs.readFileSync as Mock).mockReturnValue('raw content');
-      (matter as unknown as Mock).mockReturnValue({
-        data: {
-          title: 'Minimal',
-          date: '2024-01-01',
-        },
-        content: 'content',
-      });
+    const post = getPostBySlug('test-post');
 
-      const post = getPostBySlug(mockSlug);
-
-      expect(post.image).toBe('/images/blog-cover-default.png');
-      expect(post.tags).toEqual([]);
-      expect(post.description).toBe('');
-    });
+    expect(post).not.toBeNull();
+    expect(post!.title).toBe('Test Post');
+    expect(post!.tags).toEqual(['react']);
   });
 
-  describe('getAllPosts', () => {
-    it('returns all posts sorted by date (newest first)', () => {
-      // Mock readdir to return 2 files
-      (fs.readdirSync as Mock).mockReturnValue(['old.mdx', 'new.mdx']);
+  it('should check Spanish first, then English', () => {
+    (fs.existsSync as Mock).mockImplementation((p: string) => p.includes('/en/'));
+    (fs.readFileSync as Mock).mockReturnValue('');
+    mockPost({ title: 'English Post', date: '2025-01-01' });
 
-      // Setup mock behavior for getPostBySlug calls via mocks
-      (fs.readFileSync as Mock).mockImplementation((filePath: string) => {
-        if (filePath.includes('new.mdx')) return 'new-content';
-        return 'old-content';
-      });
+    const post = getPostBySlug('my-post');
 
-      (matter as unknown as Mock).mockImplementation((content: string) => {
-        if (content === 'new-content') {
-          return { data: { title: 'New', date: '2025-01-01' }, content: '...' };
-        }
-        return { data: { title: 'Old', date: '2020-01-01' }, content: '...' };
-      });
+    expect(post?.language).toBe('en');
+  });
 
-      const posts = getAllPosts();
+  it('should return null when post not found', () => {
+    (fs.existsSync as Mock).mockReturnValue(false);
 
-      expect(posts).toHaveLength(2);
-      expect(posts[0].title).toBe('New');
-      expect(posts[1].title).toBe('Old');
+    expect(getPostBySlug('ghost-post')).toBeNull();
+  });
+
+  it('should use defaults for missing fields', () => {
+    (fs.existsSync as Mock).mockImplementation((p: string) => p.includes('/es/'));
+    (fs.readFileSync as Mock).mockReturnValue('');
+    mockPost({ title: 'Minimal', date: '2025-01-01' });
+
+    const post = getPostBySlug('minimal');
+
+    expect(post!.image).toBe('/images/blog-cover-default.png');
+    expect(post!.tags).toEqual([]);
+    expect(post!.description).toBe('');
+  });
+});
+
+describe('getAllPosts', () => {
+  it('should return all posts sorted by date (newest first)', () => {
+    (fs.existsSync as Mock).mockReturnValue(true);
+    (fs.readdirSync as Mock).mockImplementation((path: string) => {
+      if (path.includes('/es')) return ['old.mdx'];
+      if (path.includes('/en')) return ['new.mdx'];
+      return [];
     });
+    (fs.readFileSync as Mock).mockImplementation((path: string) =>
+      path.includes('old') ? 'old' : 'new',
+    );
+    (matter as unknown as Mock).mockImplementation((content: string) => {
+      if (content === 'old') {
+        return { data: { title: 'Old Post', date: '2024-01-01' }, content: '' };
+      }
+      return { data: { title: 'New Post', date: '2025-01-01' }, content: '' };
+    });
+
+    const posts = getAllPosts();
+
+    expect(posts[0].title).toBe('New Post');
+    expect(posts[1].title).toBe('Old Post');
+  });
+});
+
+describe('getPostSlugs', () => {
+  it('should return slugs from both languages', () => {
+    (fs.existsSync as Mock).mockReturnValue(true);
+    (fs.readdirSync as Mock).mockImplementation((path: string) => {
+      if (path.includes('/es')) return ['post-es.mdx'];
+      if (path.includes('/en')) return ['post-en.mdx'];
+      return [];
+    });
+    (fs.readFileSync as Mock).mockReturnValue('');
+    mockPost({ title: 'Post', date: '2025-01-01' });
+
+    const slugs = getPostSlugs();
+
+    expect(slugs).toContain('post-es');
+    expect(slugs).toContain('post-en');
   });
 });

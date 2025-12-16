@@ -39,7 +39,16 @@
     "viewAll": "Ver todo →",
     "minRead": "min. lectura",
     "noDescription": "No hay descripción.",
-    "empty": "No hay entradas en el blog."
+    "empty": "No hay entradas en el blog.",
+    "backToHome": "← Volver al inicio",
+    "backToBlog": "Volver al blog",
+    "subtitle": "Reflexiones, ideas y aprendizajes en el camino.",
+    "featured": "Destacado",
+    "moreArticles": "Más Artículos",
+    "readingTime": "min de lectura",
+    "share": "Compartir:",
+    "shareOnTwitter": "Compartir en Twitter",
+    "shareOnLinkedIn": "Compartir en LinkedIn"
   },
   "language": {
     "switch": "EN"

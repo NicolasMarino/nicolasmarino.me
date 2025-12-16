@@ -1,6 +1,3 @@
-// =============================================================================
-// Blog Types
-// =============================================================================
 export interface Post {
   slug: string;
   title: string;
@@ -10,6 +7,7 @@ export interface Post {
   image?: string;
   readTime?: number;
   tags?: string[];
+  language?: 'es' | 'en';
 }
 
 // =============================================================================
@@ -37,5 +35,31 @@ export interface TechItem {
 export interface NavItem {
   href: string;
   labelKey: string;
+  external?: boolean;
+}
+
+// =============================================================================
+// Component Props
+// =============================================================================
+
+/**
+ * Base props for components that receive a single post
+ */
+export interface PostProps {
+  post: Post;
+}
+
+export interface PostGridProps {
+  posts: Post[];
+}
+
+export interface BlogCardProps extends PostProps {
+  priority?: boolean;
+  className?: string;
+}
+
+export interface DockItemProps {
+  href: string;
+  label: string;
   external?: boolean;
 }

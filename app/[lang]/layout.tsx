@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Fira_Code } from 'next/font/google';
-import './globals.css';
+import '../globals.css';
 import DockNavbar from '@/components/dock-navbar';
 import { LanguageProvider } from '@/lib/i18n/LanguageContext';
 
@@ -32,18 +32,24 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export async function generateStaticParams() {
+  return [{ lang: 'en' }, { lang: 'es' }];
+}
+
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ lang: string }>;
 }>) {
+  const { lang } = await params;
+  const validLang = (['en', 'es'].includes(lang) ? lang : 'en') as 'en' | 'es';
+
   return (
-    <html lang="en" className={`${firaCode.variable}`}>
-      <body
-        className="antialiased"
-        style={{ margin: 0, padding: 0, width: '100%', overflowX: 'hidden' }}
-      >
-        <LanguageProvider>
+    <html lang={validLang} className={`${firaCode.variable}`}>
+      <body className="antialiased">
+        <LanguageProvider initialLanguage={validLang}>
           {children}
           <DockNavbar />
         </LanguageProvider>

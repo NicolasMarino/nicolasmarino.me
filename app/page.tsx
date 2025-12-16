@@ -1,34 +1,16 @@
-import Hero from '@/components/hero';
-import About from '@/components/about';
-import Projects from '@/components/projects';
-import Contact from '@/components/contact';
-import TechIcons from '@/components/tech-icons';
-import BlogPreview from '@/components/blog-preview';
-import { getAllPosts } from '@/lib/blog';
+'use client';
 
-export default async function Home() {
-  const posts = await getAllPosts();
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-  return (
-    <main className="main-page">
-      <div className="main-container">
-        <Hero />
-        <div className="section-spacer-sm">
-          <TechIcons />
-        </div>
-        <div className="section-spacer">
-          <About />
-        </div>
-        <div className="section-spacer">
-          <Projects />
-        </div>
-        <div className="section-spacer">
-          <BlogPreview posts={posts} />
-        </div>
-        <div className="section-spacer">
-          <Contact />
-        </div>
-      </div>
-    </main>
-  );
+export default function RootRedirect() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const browserLang = navigator.language || navigator.languages?.[0] || 'en';
+    const targetLang = browserLang.toLowerCase().startsWith('es') ? 'es' : 'en';
+    router.replace(`/${targetLang}`);
+  }, [router]);
+
+  return null;
 }

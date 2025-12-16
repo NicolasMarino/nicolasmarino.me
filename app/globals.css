@@ -1,6 +1,5 @@
 @import 'tailwindcss';
 
-/* Theme colors for Tailwind v4 */
 @theme {
   --color-background: #ffffff;
   --color-foreground: #111111;
@@ -52,117 +51,6 @@ body {
 ::selection {
   background: #111111;
   color: #ffffff;
-}
-
-/* Page Layout */
-.main-page {
-  min-height: 100vh;
-  background-color: var(--background);
-  color: var(--foreground);
-  padding-bottom: 8rem;
-}
-.main-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem;
-}
-.section-spacer {
-  margin-top: 5rem;
-}
-.section-spacer-sm {
-  margin-top: 2rem;
-}
-
-/* Dock Navigation */
-.dock-navbar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  z-index: 50;
-  pointer-events: none;
-  padding-bottom: 24px;
-}
-.dock-navbar::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 120px;
-  background: linear-gradient(to top, var(--background) 60%, transparent 100%);
-  pointer-events: none;
-}
-
-.dock-container {
-  display: flex;
-  align-items: flex-end;
-  gap: 8px;
-  padding: 10px 16px 8px;
-  background-color: rgba(17, 17, 17, 0.95);
-  backdrop-filter: blur(12px);
-  border-radius: 16px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  pointer-events: auto;
-  overflow: visible;
-}
-
-.dock-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 6px 10px;
-  border-radius: 10px;
-  transition:
-    background-color 0.2s ease,
-    padding-bottom 0.2s ease;
-  text-decoration: none;
-  gap: 4px;
-  width: 56px;
-  min-height: 32px;
-}
-
-.dock-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  padding-bottom: 6px;
-}
-
-.dock-icon {
-  width: 18px;
-  height: 18px;
-  color: rgba(255, 255, 255, 0.7);
-  transition:
-    color 0.2s ease,
-    transform 0.2s ease;
-}
-
-.dock-item:hover .dock-icon {
-  color: white;
-  transform: translateY(-2px);
-}
-
-.dock-tooltip {
-  font-family: var(--font-fira-code), 'Fira Code', ui-monospace, monospace;
-  font-size: 8px;
-  font-weight: 400;
-  letter-spacing: 0.03em;
-  color: rgba(255, 255, 255, 0.9);
-  white-space: nowrap;
-  text-transform: lowercase;
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition:
-    max-height 0.2s ease,
-    opacity 0.15s ease;
-}
-
-.dock-item:hover .dock-tooltip {
-  max-height: 12px;
-  opacity: 1;
 }
 
 .dock-separator {
@@ -748,8 +636,8 @@ body {
   margin-bottom: 4rem;
 }
 .blog-detail-footer {
-  margin-top: 6rem;
-  padding-top: 3rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
   border-top: 1px solid var(--border);
 }
 .blog-detail-footer-content {
@@ -786,11 +674,11 @@ body {
   background-color: var(--muted);
 }
 .blog-detail-spacer {
-  height: 3rem;
+  height: 1.5rem;
 }
 @media (min-width: 768px) {
   .blog-detail-spacer {
-    height: 8rem;
+    height: 3rem;
   }
 }
 
@@ -1103,37 +991,45 @@ body {
   text-decoration: underline;
 }
 
-/* Prose Mobile Responsive - at end for cascade priority */
+/* Prose Mobile Responsive */
 @media (max-width: 767px) {
-  .prose {
-    font-size: 0.875rem !important;
-    line-height: 1.6 !important;
+  article.prose,
+  .prose[class] {
+    font-size: 0.875rem;
+    line-height: 1.6;
   }
-  .prose h1 {
-    font-size: 1.25rem !important;
-    margin-bottom: 0.75rem !important;
+  article.prose h1,
+  .prose[class] h1 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
   }
-  .prose h2 {
-    font-size: 1.125rem !important;
-    margin-top: 1.25rem !important;
-    margin-bottom: 0.5rem !important;
+  article.prose h2,
+  .prose[class] h2 {
+    font-size: 1.125rem;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
   }
-  .prose h3 {
-    font-size: 1rem !important;
-    margin-top: 1rem !important;
-    margin-bottom: 0.5rem !important;
+  article.prose h3,
+  .prose[class] h3 {
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
   }
-  .prose p {
-    margin-top: 0.75rem !important;
-    margin-bottom: 0.75rem !important;
+  article.prose p,
+  .prose[class] p {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
   }
-  .prose ul,
-  .prose ol {
-    margin-top: 0.75rem !important;
-    margin-bottom: 0.75rem !important;
+  article.prose ul,
+  article.prose ol,
+  .prose[class] ul,
+  .prose[class] ol {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
   }
-  .prose li {
-    margin-top: 0.25rem !important;
-    margin-bottom: 0.25rem !important;
+  article.prose li,
+  .prose[class] li {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
   }
 }

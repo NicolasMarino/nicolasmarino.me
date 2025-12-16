@@ -1,6 +1,7 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, ReactNode } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import en from './en.json';
 import es from './es.json';
 
@@ -29,15 +30,28 @@ function getNestedValue(obj: NestedObject, path: string): string {
   return typeof result === 'string' ? result : path;
 }
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>('en');
+export function LanguageProvider({
+  children,
+  initialLanguage,
+}: {
+  children: ReactNode;
+  initialLanguage: Language;
+}) {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const setLanguage = (newLang: Language) => {
+    if (newLang === initialLanguage) return;
+    const newPath = pathname.replace(`/${initialLanguage}`, `/${newLang}`);
+    router.push(newPath);
+  };
 
   const t = (key: string): string => {
-    return getNestedValue(translations[language], key);
+    return getNestedValue(translations[initialLanguage], key);
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language: initialLanguage, setLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );

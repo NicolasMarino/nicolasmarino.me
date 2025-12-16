@@ -39,7 +39,16 @@
     "viewAll": "View all →",
     "minRead": "min read",
     "noDescription": "No description available.",
-    "empty": "No blog posts available."
+    "empty": "No blog posts available.",
+    "backToHome": "← Back to home",
+    "backToBlog": "Back to blog",
+    "subtitle": "Thoughts, ideas, and things I've learned along the way.",
+    "featured": "Featured",
+    "moreArticles": "More Articles",
+    "readingTime": "min read",
+    "share": "Share:",
+    "shareOnTwitter": "Share on Twitter",
+    "shareOnLinkedIn": "Share on LinkedIn"
   },
   "language": {
     "switch": "ES"
