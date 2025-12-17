@@ -11,7 +11,9 @@
   "hero": {
     "name": "Nicolás Marino",
     "role": "Software Developer",
-    "description": "Simplificar | Documentar | Medir",
+    "flipWord1": "Simplificar",
+    "flipWord2": "Documentar",
+    "flipWord3": "Medir",
     "cta": "Contactame"
   },
   "about": {

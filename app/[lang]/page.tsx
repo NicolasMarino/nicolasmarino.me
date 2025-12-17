@@ -10,8 +10,8 @@ export default async function Home() {
   const posts = await getAllPosts();
 
   return (
-    <main className="min-h-screen bg-background text-foreground pb-20">
-      <div className="mx-auto max-w-[800px] px-6 py-8">
+    <main className="min-h-screen text-foreground pb-20">
+      <div className="mx-auto max-w-[800px] px-6 py-8 notebook-card">
         <Hero />
         <div className="mt-8">
           <TechIcons />

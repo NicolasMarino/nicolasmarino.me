@@ -11,7 +11,7 @@ export default function Contact() {
 
   return (
     <section id="contact">
-      <h2 className="text-3xl font-bold tracking-tight mb-4">{t('contact.title')}</h2>
+      <h2 className="text-3xl font-bold tracking-tight mb-4 section-title">{t('contact.title')}</h2>
       <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mb-8">
         {t('contact.description')}
       </p>
@@ -37,7 +37,7 @@ export default function Contact() {
         </Link>
       </div>
 
-      <div className="flex gap-3 mb-6">
+      <div className="flex items-center gap-4 flex-wrap mb-6">
         <Link
           href={siteConfig.github}
           target="_blank"
@@ -56,14 +56,13 @@ export default function Contact() {
         >
           <SiLinkedin className="w-5 h-5" />
         </Link>
+        <span className="text-sm text-muted-foreground">
+          {t('contact.orEmail')}{' '}
+          <Link href={`mailto:${siteConfig.email}`} className="text-primary hover:underline">
+            {siteConfig.email}
+          </Link>
+        </span>
       </div>
-
-      <p className="text-sm text-muted-foreground">
-        {t('contact.orEmail')}{' '}
-        <Link href={`mailto:${siteConfig.email}`} className="text-primary hover:underline">
-          {siteConfig.email}
-        </Link>
-      </p>
     </section>
   );
 }

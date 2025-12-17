@@ -1,6 +1,6 @@
 'use client';
 
-import { MinimalCard } from '@/components/ui/minimal-card';
+import { ProjectCard3D } from '@/components/project-card-3d';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { projects } from '@/data/projects';
 
@@ -9,10 +9,12 @@ export default function Projects() {
 
   return (
     <section id="projects">
-      <h2 className="text-3xl font-bold tracking-tight mb-6">{t('projects.title')}</h2>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <h2 className="text-3xl font-bold tracking-tight mb-4 section-title">
+        {t('projects.title')}
+      </h2>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2 lg:gap-8">
         {projects.map((project) => (
-          <MinimalCard key={project.title} {...project} />
+          <ProjectCard3D key={project.title} {...project} />
         ))}
       </div>
     </section>

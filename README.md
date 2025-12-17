@@ -21,10 +21,6 @@ Personal portfolio website built with **Next.js 16** and **React 19**.
 
 - 🌐 **Internationalization** – Full EN/ES support with language switcher
 - 📝 **MDX Blog** – Syntax highlighting with Shiki, KaTeX for math formulas
-- 🎨 **Unique Design** – Minimalist notebook-style aesthetic
-- ⚡ **Performance** – Optimized with Next.js App Router
-- 📱 **Responsive** – Works seamlessly on all devices
-- ♿ **Accessible** – Semantic HTML and keyboard navigation
 
 ---
 
@@ -52,7 +48,8 @@ Personal portfolio website built with **Next.js 16** and **React 19**.
 ├── data/          # Static data (projects, tech stack)
 ├── lib/           # Utilities & i18n
 ├── types/         # TypeScript interfaces
-└── public/        # Static assets
+├── public/        # Static assets
+└── components.json # shadcn/ui configuration
 ```
 
 ---

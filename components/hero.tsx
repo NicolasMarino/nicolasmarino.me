@@ -5,9 +5,12 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { siteConfig } from '@/config/site';
+import { FlipWords } from '@/components/ui/flip-words';
 
 export default function Hero() {
   const { t } = useLanguage();
+
+  const words = [t('hero.flipWord1'), t('hero.flipWord2'), t('hero.flipWord3')];
 
   return (
     <section className="flex flex-col items-center justify-center text-center gap-6 pt-8 pb-8">
@@ -39,9 +42,9 @@ export default function Hero() {
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
           <span className="text-foreground">{t('hero.name')}</span>
         </h1>
-        <p className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto">
-          {t('hero.description')}
-        </p>
+        <div className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto mt-2 h-8 flex items-center justify-center">
+          <FlipWords words={words} duration={1500} className="text-primary font-medium" />
+        </div>
       </motion.div>
 
       <motion.div

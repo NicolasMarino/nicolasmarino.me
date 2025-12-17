@@ -53,4 +53,8 @@ export const techStack: TechItem[] = [
     name: 'BigQuery',
     icon: 'https://www.vectorlogo.zone/logos/google_bigquery/google_bigquery-icon.svg',
   },
+  {
+    name: 'Looker Studio',
+    icon: 'https://cdn.simpleicons.org/looker',
+  },
 ];

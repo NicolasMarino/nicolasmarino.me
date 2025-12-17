@@ -11,7 +11,9 @@
   "hero": {
     "name": "Nicolás Marino",
     "role": "Software Developer",
-    "description": "Simplify | Document | Measure",
+    "flipWord1": "Simplify",
+    "flipWord2": "Document",
+    "flipWord3": "Measure",
     "cta": "Contact me"
   },
   "about": {
