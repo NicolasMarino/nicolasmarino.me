@@ -124,62 +124,55 @@ body {
   color: #ffffff;
 }
 
-.dock-separator {
-  width: 1px;
-  height: 28px;
-  background-color: rgba(255, 255, 255, 0.15);
-  margin: 0 4px;
-}
+@layer utilities {
+  .dock-nav {
+    @apply fixed bottom-0 left-0 right-0 z-50 flex justify-center pb-6 pointer-events-none max-md:pb-4;
+    @apply before:absolute before:bottom-0 before:left-0 before:right-0 before:h-[120px] before:bg-gradient-to-t before:from-background before:via-background/60 before:to-transparent before:pointer-events-none;
+  }
 
-/* Dock Responsive */
-@media (max-width: 767px) {
-  .dock-navbar {
-    padding-bottom: 16px;
-    left: 8px;
-    right: 8px;
+  .dock-nav-mobile-gradient {
+    @apply max-md:before:h-[100px];
   }
-  .dock-navbar::before {
-    height: 100px;
-  }
+
   .dock-container {
-    gap: 2px;
-    padding: 8px 8px 6px;
-    border-radius: 14px;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    max-width: 100%;
-    scrollbar-width: none;
+    @apply flex items-end gap-2 p-2.5 pb-2 bg-[#111111]/95 backdrop-blur-xl rounded-2xl shadow-2xl pointer-events-auto;
+    @apply max-md:gap-0 max-md:p-1.5 max-md:pb-1 max-md:rounded-xl;
   }
-  .dock-container::-webkit-scrollbar {
-    display: none;
-  }
+
   .dock-item {
-    padding: 4px 6px;
-    width: 40px;
-    min-width: 40px;
-    min-height: 28px;
-    flex-shrink: 0;
+    @apply flex flex-col items-center justify-end p-1.5 rounded-[10px] transition-all duration-200 no-underline gap-1 w-14 min-h-[32px];
+    @apply hover:bg-white/10 hover:pb-1.5;
+    @apply max-md:p-2 max-md:w-11 max-md:min-w-[44px] max-md:min-h-[40px] max-md:shrink-0 max-[380px]:w-10 max-[380px]:min-w-[40px];
   }
+
   .dock-icon {
-    width: 16px;
-    height: 16px;
+    @apply w-[18px] h-[18px] text-white/70 transition-all duration-200;
+    @apply max-md:w-5 max-md:h-5;
   }
-  .dock-tooltip {
-    font-size: 6px;
-  }
-  .dock-item:hover .dock-tooltip {
-    max-height: 10px;
-  }
-  .dock-separator {
-    height: 22px;
-    margin: 0 2px;
-    flex-shrink: 0;
-  }
-  .dock-item:hover {
-    padding-bottom: 4px;
-  }
+
+  /* Usamos selectores CSS para manejar el hover de los hijos de forma limpia */
   .dock-item:hover .dock-icon {
-    transform: translateY(-1px);
+    @apply text-white -translate-y-0.5;
+  }
+
+  /* En móvil quitamos el desplazamiento del icono */
+  @media (max-width: 767px) {
+    .dock-item:hover .dock-icon {
+      @apply translate-y-0;
+    }
+  }
+
+  .dock-label {
+    @apply font-mono text-[8px] font-normal tracking-[0.03em] text-white/90 whitespace-nowrap lowercase max-h-0 opacity-0 overflow-hidden transition-[max-height,opacity] duration-200 ease-in-out;
+  }
+
+  .dock-item:hover .dock-label {
+    @apply md:max-h-[12px] md:opacity-100;
+  }
+
+  .dock-separator {
+    @apply w-px h-7 bg-white/15 mx-1;
+    @apply max-md:h-6 max-md:mx-1;
   }
 }
 

@@ -10,27 +10,43 @@ const firaCode = Fira_Code({
   display: 'swap',
 });
 
-export const metadata: Metadata = {
-  title: 'Nicolas Marino - Software Engineer',
-  description: 'Software Engineer based in Colombia.',
-  keywords: ['portfolio', 'software engineer', 'developer', 'web development'],
-  authors: [{ name: 'Nicolas Marino' }],
-  creator: 'Nicolas Marino',
-  openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: 'https://nicolasmarino.me',
-    title: 'Nicolas Marino - Software Engineer',
-    description: 'Software Engineer based in Colombia.',
-    siteName: 'Nicolas Marino',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Nicolas Marino - Software Engineer',
-    description: 'Software Engineer based in Colombia.',
-    creator: '@nicolasmarino',
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const isEs = lang === 'es';
+
+  const title = isEs
+    ? 'Nicolás Marino - Ingeniero de Software'
+    : 'Nicolas Marino - Software Engineer';
+  const description = isEs
+    ? 'Portfolio personal y blog de Nicolás Marino, Ingeniero de Software especializado en Backend y Ciencia de Datos.'
+    : 'Personal portfolio and blog of Nicolas Marino, a Software Engineer focused on Backend and Data Science.';
+
+  return {
+    title,
+    description,
+    keywords: ['portfolio', 'software engineer', 'developer', 'web development', 'data science'],
+    authors: [{ name: 'Nicolas Marino' }],
+    creator: 'Nicolas Marino',
+    openGraph: {
+      type: 'website',
+      locale: isEs ? 'es_ES' : 'en_US',
+      url: 'https://nicolasmarino.me',
+      title,
+      description,
+      siteName: 'Nicolas Marino',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      creator: '@nicolasmarino',
+    },
+  };
+}
 
 export async function generateStaticParams() {
   return [{ lang: 'en' }, { lang: 'es' }];

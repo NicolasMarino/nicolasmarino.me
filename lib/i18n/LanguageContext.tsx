@@ -11,7 +11,8 @@ type Translations = typeof en;
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  t: (key: string) => any;
 }
 
 const translations: Record<Language, Translations> = { en, es };
@@ -20,14 +21,14 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 type NestedObject = Record<string, unknown>;
 
-function getNestedValue(obj: NestedObject, path: string): string {
+function getNestedValue(obj: NestedObject, path: string): unknown {
   const result = path.split('.').reduce<unknown>((acc, part) => {
-    if (acc && typeof acc === 'object' && part in acc) {
+    if (acc && typeof acc === 'object' && acc !== null && part in acc) {
       return (acc as NestedObject)[part];
     }
     return undefined;
   }, obj);
-  return typeof result === 'string' ? result : path;
+  return result ?? path;
 }
 
 export function LanguageProvider({
@@ -46,7 +47,8 @@ export function LanguageProvider({
     router.push(newPath);
   };
 
-  const t = (key: string): string => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const t = (key: string): any => {
     return getNestedValue(translations[initialLanguage], key);
   };
 

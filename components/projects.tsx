@@ -14,7 +14,7 @@ export default function Projects() {
       </h2>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2 lg:gap-8">
         {projects.map((project) => (
-          <ProjectCard3D key={project.title} {...project} />
+          <ProjectCard3D key={project.id} {...project} />
         ))}
       </div>
     </section>

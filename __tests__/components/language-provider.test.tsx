@@ -97,22 +97,33 @@ describe('LanguageProvider', () => {
       </LanguageProvider>,
     );
 
-    // Toggle twice to get back to 'en'
-    await act(async () => {
-      screen.getByText('Toggle').click();
-    });
-    mockPush.mockClear();
+    // Initial state is 'en'. Try setting it to 'en' again.
+    const { setLanguage } = useLanguageFromHook();
 
     await act(async () => {
-      screen.getByText('Toggle').click();
+      setLanguage('en');
     });
 
-    // After toggling back to es->en, it should have called push
-    // But if we call setLanguage with current language, it shouldn't
-    // This test verifies the toggle works, not same-language check
-    expect(mockPush).toHaveBeenCalled();
+    expect(mockPush).not.toHaveBeenCalled();
   });
 });
+
+type LanguageContextReturn = ReturnType<typeof useLanguage>;
+
+// Helper to access context from outside render for cleaner tests
+function useLanguageFromHook(): LanguageContextReturn {
+  let result: LanguageContextReturn | undefined;
+  function HookConsumer() {
+    result = useLanguage();
+    return null;
+  }
+  render(
+    <LanguageProvider initialLanguage="en">
+      <HookConsumer />
+    </LanguageProvider>,
+  );
+  return result!;
+}
 
 describe('useLanguage', () => {
   it('should throw when used outside provider', () => {

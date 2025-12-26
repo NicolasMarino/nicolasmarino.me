@@ -1,18 +1,21 @@
 import Image from 'next/image';
-import { getPostBySlug, getPostSlugs } from '@/lib/blog';
+import { getPostBySlug, getAllPostParams } from '@/lib/blog';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { notFound } from 'next/navigation';
 import { BlogDetailHeader } from '@/components/blog/blog-detail-header';
 import { BlogDetailFooter } from '@/components/blog/blog-detail-footer';
 
 export async function generateStaticParams() {
-  const slugs = getPostSlugs();
-  return slugs.map((slug) => ({ slug }));
+  return getAllPostParams();
 }
 
-export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const post = getPostBySlug(slug);
+export default async function BlogPost({
+  params,
+}: {
+  params: Promise<{ slug: string; lang: string }>;
+}) {
+  const { slug, lang } = await params;
+  const post = getPostBySlug(slug, lang as 'es' | 'en');
 
   if (!post) {
     notFound();

@@ -45,8 +45,10 @@ export function getAllPosts(): Post[] {
   return [...esPosts, ...enPosts].sort((a, b) => (a.date > b.date ? -1 : 1));
 }
 
-export function getPostBySlug(slug: string): Post | null {
-  for (const lang of ['es', 'en'] as const) {
+export function getPostBySlug(slug: string, language?: 'es' | 'en'): Post | null {
+  const languages = language ? [language] : (['es', 'en'] as const);
+
+  for (const lang of languages) {
     const fullPath = path.join(contentDirectory, lang, `${slug}.mdx`);
     if (fs.existsSync(fullPath)) {
       const fileContents = fs.readFileSync(fullPath, 'utf8');
@@ -68,7 +70,15 @@ export function getPostBySlug(slug: string): Post | null {
   return null;
 }
 
+export function getAllPostParams(): { lang: 'es' | 'en'; slug: string }[] {
+  const posts = getAllPosts();
+  return posts.map((post) => ({
+    lang: post.language as 'es' | 'en',
+    slug: post.slug,
+  }));
+}
+
 export function getPostSlugs(): string[] {
   const allPosts = getAllPosts();
-  return allPosts.map((post) => post.slug);
+  return Array.from(new Set(allPosts.map((post) => post.slug)));
 }

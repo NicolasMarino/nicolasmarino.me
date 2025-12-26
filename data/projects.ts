@@ -2,14 +2,12 @@ import type { Project } from '@/types';
 
 export const projects: Project[] = [
   {
-    title: 'Conectandote',
-    description: 'Platform to help people find what to study.',
+    id: 'conectandote',
     tags: ['Node.js', 'AWS', 'Typescript', 'Vue'],
     link: 'https://conectandote.com.uy/',
   },
   {
-    title: 'Dot files',
-    description: 'Personal dot files.',
+    id: 'dotfiles',
     tags: ['shell'],
     link: 'https://github.com/NicolasMarino/dotfiles',
   },

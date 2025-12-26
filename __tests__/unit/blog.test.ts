@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { getPostSlugs, getPostBySlug, getAllPosts, getPostsByLanguage } from '@/lib/blog';
 import fs from 'fs';
 import matter from 'gray-matter';
@@ -15,20 +15,25 @@ vi.mock('gray-matter', () => ({
   default: vi.fn(),
 }));
 
+const mockedFs = vi.mocked(fs);
+const mockedMatter = vi.mocked(matter);
+
 beforeEach(() => {
   vi.clearAllMocks();
   vi.spyOn(process, 'cwd').mockReturnValue('/app');
 });
 
 function mockPost(data: Record<string, unknown>, content = 'Some content here') {
-  (matter as unknown as Mock).mockReturnValue({ data, content });
+  mockedMatter.mockReturnValue({ data, content } as unknown as ReturnType<typeof matter>);
 }
 
 describe('getPostsByLanguage', () => {
-  it('should return posts for the given language', () => {
-    (fs.existsSync as Mock).mockReturnValue(true);
-    (fs.readdirSync as Mock).mockReturnValue(['my-post.mdx']);
-    (fs.readFileSync as Mock).mockReturnValue('');
+  it('returns posts for the specified language', () => {
+    mockedFs.existsSync.mockReturnValue(true);
+    mockedFs.readdirSync.mockReturnValue(['my-post.mdx'] as unknown as ReturnType<
+      typeof fs.readdirSync
+    >);
+    mockedFs.readFileSync.mockReturnValue('');
     mockPost({ title: 'Mi Post', date: '2025-01-01' });
 
     const posts = getPostsByLanguage('es');
@@ -37,16 +42,19 @@ describe('getPostsByLanguage', () => {
     expect(posts[0].language).toBe('es');
   });
 
-  it('should return empty when directory does not exist', () => {
-    (fs.existsSync as Mock).mockReturnValue(false);
-
+  it('returns empty array when directory is missing', () => {
+    mockedFs.existsSync.mockReturnValue(false);
     expect(getPostsByLanguage('es')).toEqual([]);
   });
 
-  it('should only include .mdx files', () => {
-    (fs.existsSync as Mock).mockReturnValue(true);
-    (fs.readdirSync as Mock).mockReturnValue(['post.mdx', 'readme.md', 'notes.txt']);
-    (fs.readFileSync as Mock).mockReturnValue('');
+  it('filters out non-mdx files', () => {
+    mockedFs.existsSync.mockReturnValue(true);
+    mockedFs.readdirSync.mockReturnValue([
+      'post.mdx',
+      'readme.md',
+      'notes.txt',
+    ] as unknown as ReturnType<typeof fs.readdirSync>);
+    mockedFs.readFileSync.mockReturnValue('');
     mockPost({ title: 'Post', date: '2025-01-01' });
 
     expect(getPostsByLanguage('es')).toHaveLength(1);
@@ -54,9 +62,10 @@ describe('getPostsByLanguage', () => {
 });
 
 describe('getPostBySlug', () => {
-  it('should find a post by slug', () => {
-    (fs.existsSync as Mock).mockImplementation((p: string) => p.includes('/es/'));
-    (fs.readFileSync as Mock).mockReturnValue('');
+  it('finds a post by slug', () => {
+    mockedFs.existsSync.mockImplementation(((p: string) =>
+      p.includes('/es/')) as unknown as typeof fs.existsSync);
+    mockedFs.readFileSync.mockReturnValue('');
     mockPost({
       title: 'Test Post',
       date: '2025-01-01',
@@ -68,56 +77,56 @@ describe('getPostBySlug', () => {
     const post = getPostBySlug('test-post');
 
     expect(post).not.toBeNull();
-    expect(post!.title).toBe('Test Post');
-    expect(post!.tags).toEqual(['react']);
+    expect(post?.title).toBe('Test Post');
+    expect(post?.tags).toEqual(['react']);
   });
 
-  it('should check Spanish first, then English', () => {
-    (fs.existsSync as Mock).mockImplementation((p: string) => p.includes('/en/'));
-    (fs.readFileSync as Mock).mockReturnValue('');
-    mockPost({ title: 'English Post', date: '2025-01-01' });
+  it('respects the provided language override', () => {
+    mockedFs.existsSync.mockImplementation(((p: string) =>
+      p.includes('/en/')) as unknown as typeof fs.existsSync);
+    mockedFs.readFileSync.mockReturnValue('');
+    mockPost({ title: 'English Only', date: '2025-01-01' });
 
-    const post = getPostBySlug('my-post');
-
-    expect(post?.language).toBe('en');
+    // Try to find in ES (should fail/null)
+    const post = getPostBySlug('english-only', 'es');
+    expect(post).toBeNull();
   });
 
-  it('should return null when post not found', () => {
-    (fs.existsSync as Mock).mockReturnValue(false);
-
+  it('returns null when post does not exist in any language', () => {
+    mockedFs.existsSync.mockReturnValue(false);
     expect(getPostBySlug('ghost-post')).toBeNull();
   });
 
-  it('should use defaults for missing fields', () => {
-    (fs.existsSync as Mock).mockImplementation((p: string) => p.includes('/es/'));
-    (fs.readFileSync as Mock).mockReturnValue('');
+  it('populates default values for missing frontmatter fields', () => {
+    mockedFs.existsSync.mockImplementation(((p: string) =>
+      p.includes('/es/')) as unknown as typeof fs.existsSync);
+    mockedFs.readFileSync.mockReturnValue('');
     mockPost({ title: 'Minimal', date: '2025-01-01' });
 
     const post = getPostBySlug('minimal');
 
-    expect(post!.image).toBe('/images/blog-cover-default.png');
-    expect(post!.tags).toEqual([]);
-    expect(post!.description).toBe('');
+    expect(post?.image).toBe('/images/blog-cover-default.png');
+    expect(post?.tags).toEqual([]);
+    expect(post?.description).toBe('');
   });
 });
 
 describe('getAllPosts', () => {
-  it('should return all posts sorted by date (newest first)', () => {
-    (fs.existsSync as Mock).mockReturnValue(true);
-    (fs.readdirSync as Mock).mockImplementation((path: string) => {
+  it('returns all posts sorted by date descending', () => {
+    mockedFs.existsSync.mockReturnValue(true);
+    mockedFs.readdirSync.mockImplementation(((path: string) => {
       if (path.includes('/es')) return ['old.mdx'];
       if (path.includes('/en')) return ['new.mdx'];
       return [];
-    });
-    (fs.readFileSync as Mock).mockImplementation((path: string) =>
-      path.includes('old') ? 'old' : 'new',
-    );
-    (matter as unknown as Mock).mockImplementation((content: string) => {
+    }) as unknown as typeof fs.readdirSync);
+    mockedFs.readFileSync.mockImplementation(((path: string) =>
+      path.includes('old') ? 'old' : 'new') as unknown as typeof fs.readFileSync);
+    mockedMatter.mockImplementation(((content: string) => {
       if (content === 'old') {
         return { data: { title: 'Old Post', date: '2024-01-01' }, content: '' };
       }
       return { data: { title: 'New Post', date: '2025-01-01' }, content: '' };
-    });
+    }) as unknown as typeof matter);
 
     const posts = getAllPosts();
 
@@ -127,14 +136,14 @@ describe('getAllPosts', () => {
 });
 
 describe('getPostSlugs', () => {
-  it('should return slugs from both languages', () => {
-    (fs.existsSync as Mock).mockReturnValue(true);
-    (fs.readdirSync as Mock).mockImplementation((path: string) => {
+  it('returns unique slugs from both languages', () => {
+    mockedFs.existsSync.mockReturnValue(true);
+    mockedFs.readdirSync.mockImplementation(((path: string) => {
       if (path.includes('/es')) return ['post-es.mdx'];
       if (path.includes('/en')) return ['post-en.mdx'];
       return [];
-    });
-    (fs.readFileSync as Mock).mockReturnValue('');
+    }) as unknown as typeof fs.readdirSync);
+    mockedFs.readFileSync.mockReturnValue('');
     mockPost({ title: 'Post', date: '2025-01-01' });
 
     const slugs = getPostSlugs();

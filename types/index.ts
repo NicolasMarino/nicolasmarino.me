@@ -14,11 +14,18 @@ export interface Post {
 // Project Types
 // =============================================================================
 export interface Project {
-  title: string;
-  description: string;
+  id: string;
   tags: string[];
   link?: string;
   imageUrl?: string;
+}
+
+export interface Experience {
+  id: string;
+  company: string;
+  location: string;
+  period: string;
+  tags: string[];
 }
 
 // =============================================================================

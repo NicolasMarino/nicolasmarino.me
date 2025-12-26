@@ -1,5 +1,6 @@
 import Hero from '@/components/hero';
 import About from '@/components/about';
+import Experience from '@/components/experience';
 import Projects from '@/components/projects';
 import Contact from '@/components/contact';
 import TechIcons from '@/components/tech-icons';
@@ -18,6 +19,9 @@ export default async function Home() {
         </div>
         <div className="mt-20">
           <About />
+        </div>
+        <div className="mt-20">
+          <Experience />
         </div>
         <div className="mt-20">
           <Projects />

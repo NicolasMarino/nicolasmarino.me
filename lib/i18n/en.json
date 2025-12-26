@@ -1,6 +1,7 @@
 {
   "nav": {
     "home": "Home",
+    "about": "About",
     "projects": "Projects",
     "experience": "Experience",
     "blog": "Blog",
@@ -10,7 +11,7 @@
   },
   "hero": {
     "name": "Nicolás Marino",
-    "role": "Software Developer",
+    "role": "Software Engineer",
     "flipWord1": "Simplify",
     "flipWord2": "Document",
     "flipWord3": "Measure",
@@ -18,12 +19,83 @@
   },
   "about": {
     "title": "About me",
-    "p1": "Software Developer with over seven years of experience in designing and implementing backend architectures and data-driven solutions. Specialized in Python, Java, and TypeScript, I transform large volumes of information into clear insights to drive strategic decisions.",
-    "p2": "My strength lies in collaborative environments: I combine technical leadership and analytical vision to tackle complex challenges and generate high impact.",
-    "p3": "As an entrepreneur, I co-founded Conectándote (https://conectandote.com.uy/), a leading platform in Uruguay that connects students with educational opportunities; and, through my blog @Data For Everyone, I share best practices and learnings in Data Science."
+    "p1": "Software developer with over 7 years of experience working at the intersection of backend development and data science. My approach is based on three pillars: designing scalable architectures, maintaining clear documentation, and, above all, measuring the real impact of every feature in production.",
+    "p2": "I have worked on developing high-concurrency APIs and Machine Learning projects, primarily using Python, Java, and TypeScript. I firmly believe that the value of code lies not just in its execution, but in its ability to generate insights and solve complex problems efficiently.",
+    "p3": "As an entrepreneur, I co-founded Conectándote (https://conectandote.com.uy/), a platform in Uruguay that connects students with educational opportunities; and, through my blog @Data For Everyone, I spread best practices and learnings in Data Science."
+  },
+  "experience": {
+    "title": "Experience",
+    "items": {
+      "conectandote": {
+        "role": "Co-founder & CTO",
+        "description": [
+          "Leading the technical development and architecture of a platform connecting students with educational opportunities in Uruguay.",
+          "Orchestrated a scalable infrastructure on AWS and developed core features for the platform."
+        ],
+        "tags": ["Node.js", "AWS", "Vue", "PostgreSQL"]
+      },
+      "meli-senior": {
+        "role": "Senior Software Engineer",
+        "description": [
+          "Created a Python MCP that streamlined internal development workflows using proprietary libraries.",
+          "Developed a product index to detect items with high improvement potential.",
+          "Automated 15+ recurring manual processes with n8n + BigQuery + internal APIs, freeing up ~200 monthly hours for the Catalog team and improving SLA compliance.",
+          "Delivered several technical talks on AI, backend, and data at internal conferences, with a total audience of ~250 developers."
+        ],
+        "tags": ["Python", "n8n", "BigQuery", "AI/ML"]
+      },
+      "meli-ssr": {
+        "role": "Semi Senior Software Engineer",
+        "description": [
+          "Designed a non-compliant image detection system that removed 200,000+ vendor images.",
+          "Optimized BigQuery pipelines, reducing execution times and saving over 80,000 USD in costs.",
+          "Built dashboards that reduced product prioritization time by 40%.",
+          "Designed and implemented abstraction layers in Java to accelerate the integration of generative AI capabilities.",
+          "Developed a duplicate image detection system with OpenCLIP, processing 150,000+ RPM and improving matching accuracy by 30%."
+        ],
+        "tags": ["Java", "BigQuery", "Generative AI", "OpenCLIP"]
+      },
+      "meli-analyst": {
+        "role": "Software Development Analyst",
+        "description": [
+          "Improved catalog quality metrics by 22% through data solutions.",
+          "Built automated reports used by more than 50 business stakeholders.",
+          "Collaborated with the Search team to improve product ranking relevance, reducing low-quality results and increasing CTR by 8% in key categories."
+        ],
+        "tags": ["SQL", "Search", "Data Analytics", "Product Strategy"]
+      },
+      "infocorp-ssr": {
+        "role": "Semi Senior Developer",
+        "description": [
+          "Developed core modules for a mobile banking application in React Native used by 30,000+ customers.",
+          "Implemented responsive UI components together with the UX team.",
+          "Participated in code reviews and mentored junior developers."
+        ],
+        "tags": ["React Native", "Mobile", "UI/UX", "Mentoring"]
+      },
+      "infocorp-jr": {
+        "role": "Junior Developer",
+        "description": [
+          "Developed and maintained home banking platforms for three leading financial institutions in LATAM."
+        ],
+        "tags": ["Java", ".NET", "Banking", "Maintenance"]
+      }
+    }
   },
   "projects": {
-    "title": "Projects"
+    "title": "Projects",
+    "items": {
+      "conectandote": {
+        "title": "Conectándote",
+        "description": "Platform to help people find what to study and discover educational opportunities.",
+        "tags": ["Node.js", "AWS", "TypeScript", "Vue"]
+      },
+      "dotfiles": {
+        "title": "Dot files",
+        "description": "My personal configuration files, optimized for development productivity.",
+        "tags": ["Shell", "Lua", "Neovim"]
+      }
+    }
   },
   "contact": {
     "title": "Contact",
@@ -37,7 +109,7 @@
     "linkedin": "LinkedIn"
   },
   "blog": {
-    "title": "Blog",
+    "title": "Blog @Data For Everyone",
     "viewAll": "View all →",
     "minRead": "min read",
     "noDescription": "No description available.",

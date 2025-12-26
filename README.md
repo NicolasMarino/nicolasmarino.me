@@ -1,96 +1,115 @@
-# nicolasmarino.me
+# Personal Portfolio and Blog
 
-Personal portfolio website built with **Next.js 16** and **React 19**.
+A performance-optimized portfolio and blog platform built with Next.js 16, React 19, and Tailwind CSS v4.
 
-[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss)](https://tailwindcss.com/)
-
-🔗 **Live Demo:** [nicolasmarino.me](https://nicolasmarino.me)
-
----
-
-## 🖥️ Preview
-
-![Portfolio Preview](./public/preview.png)
-
----
+[Link to Live Site](https://nicolasmarino.me)
 
 ## Features
 
-- 🌐 **Internationalization** – Full EN/ES support with language switcher
-- 📝 **MDX Blog** – Syntax highlighting with Shiki, KaTeX for math formulas
-
----
+- **i18n**: Full English and Spanish support.
+- **MDX Blog**: Support for Markdown, React components, Shiki syntax highlighting, and KaTeX.
+- **Cloudflare R2**: Automated script for WebP conversion and asset uploading.
+- **Testing**: Vitest for unit tests and Playwright for E2E.
+- **UI/UX**: Built with Tailwind CSS v4, Framer Motion, and Shadcn/UI.
+- **Workflow**: Husky, Lint-staged, and Conventional Commits for code consistency.
 
 ## Tech Stack
 
-| Category  | Technology              |
-| --------- | ----------------------- |
-| Framework | Next.js 16 (App Router) |
-| UI        | React 19, Framer Motion |
-| Styling   | Tailwind CSS v4         |
-| Blog      | MDX, Shiki, KaTeX       |
-| Testing   | Vitest                  |
-| Tooling   | ESLint, Prettier, Husky |
+- **Framework**: Next.js 16 (App Router), React 19, TypeScript.
+- **Styling**: Tailwind CSS v4, Framer Motion, Lucide Icons.
+- **Content**: MDX, Rehype, Remark.
+- **Development**: Vitest, Playwright, ESLint, Prettier.
+- **Infrastructure**: Cloudflare R2, Sharp.
 
----
+## Project Organization
 
-## Project Structure
-
-```
-├── app/           # Next.js App Router pages
-├── components/    # React components
-│   └── ui/        # Reusable UI components
-├── config/        # Site configuration (links, metadata)
-├── content/       # MDX blog posts
-├── data/          # Static data (projects, tech stack)
-├── lib/           # Utilities & i18n
-├── types/         # TypeScript interfaces
-├── public/        # Static assets
-└── components.json # shadcn/ui configuration
+```bash
+├── app/              # Application routes and layouts
+├── components/       # Functional React components
+│   └── ui/           # Atomic UI components
+├── config/           # Site metadata and global parameters
+├── content/          # Blog content in MDX (EN/ES)
+├── data/             # Static data models and constants
+├── lib/              # Core utilities and i18n configuration
+├── scripts/          # Operational and automation scripts
+├── public/           # Static public assets and documentation
+└── __tests__/        # Comprehensive test suites
 ```
 
----
-
-## Getting Started
+## Installation and Setup
 
 ### Prerequisites
 
-- Node.js 18+
-- npm or yarn
+- Node.js (v24.11.1 or higher recommended)
 
-### Installation
+### Local Implementation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/nicolasmarino/nicolasmarino.me.git
+   cd nicolasmarino.me
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Configuration
+
+Environment variables are required for the automated image hosting script. Create a `.env` file using `.env.example` as a template:
+
+- `R2_ACCESS_KEY_ID`: Cloudflare R2 access key
+- `R2_SECRET_ACCESS_KEY`: Cloudflare R2 secret key
+- `R2_ENDPOINT`: Account-specific S3 API endpoint
+- `R2_BUCKET_NAME`: Target storage bucket
+- `R2_PUBLIC_URL`: Public access URL for assets
+
+### Execution
+
+Start the development environment:
 
 ```bash
-npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+## Maintenance and Deployment
+
+### Script Reference
+
+| Command            | Description                         |
+| :----------------- | :---------------------------------- |
+| `npm run dev`      | Initialize local development server |
+| `npm run build`    | Generate production-ready build     |
+| `npm run start`    | Serve production build locally      |
+| `npm run lint`     | Execute static analysis with ESLint |
+| `npm run test`     | Run test suites in watch mode       |
+| `npm run test:run` | Execute single-pass test suite      |
+| `npm run format`   | Enforce Prettier formatting         |
+| `npm run upload`   | Optimization and R2 upload script   |
+
+### Development Standards
+
+This project utilizes Husky and Lint-staged to ensure code integrity. Every commit must follow the [Conventional Commits](https://www.conventionalcommits.org/) standard to maintain a clean, readable version history.
+
+### Image Optimization Pipeline
+
+To maintain optimal performance, the project includes a script to process and host assets before publication.
+
+```bash
+npm run upload /path/to/asset.png
+```
+
+The script performs automated WebP conversion and returns the Markdown syntax required for blog integration.
+
+## Contact
+
+- **Author**: Nicolás Marino
+- **Website**: [nicolasmarino.me](https://nicolasmarino.me)
+- **LinkedIn**: [nicolásmarino](https://www.linkedin.com/in/nicol%C3%A1smarino/)
+- **Twitter**: [@nicolasmarino](https://twitter.com/nicolasmarino)
 
 ---
 
-## Scripts
+## License
 
-| Command            | Description               |
-| ------------------ | ------------------------- |
-| `npm run dev`      | Development server        |
-| `npm run build`    | Production build          |
-| `npm run lint`     | Run ESLint                |
-| `npm run test`     | Run tests (watch mode)    |
-| `npm run test:run` | Run tests once            |
-| `npm run format`   | Format code with Prettier |
-
----
-
-## Author
-
-**Nicolas Marino**
-
-- 🌐 [nicolasmarino.me](https://nicolasmarino.me)
-- 💼 [LinkedIn](https://www.linkedin.com/in/nicol%C3%A1smarino/)
-- 🐙 [GitHub](https://github.com/nicolasmarino)
-
----
+Distributed under the MIT License. See `LICENSE` for more information.
