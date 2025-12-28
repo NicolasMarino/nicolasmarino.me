@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2025-12-28]
+
+### Added
+
+- **Dark Mode Support**:
+  - Implemented theme toggle with `next-themes` library.
+  - Created `ThemeProvider` and `ThemeToggle` components.
+  - Added dark mode support for dotted background patterns.
+  - Full dark mode styling for all components.
+
+### Changed
+
+- **Color Scheme**: Updated light mode background from pure white (#ffffff) to warm cream (#FAF8F5) for a softer, less harsh appearance.
+- **Blog Detail Layout**: Restructured to use `notebook-card` class for consistent dotted margins with the homepage.
+- **Hero Overlay**: Improved gradient overlay using `color-mix()` for proper light/dark mode adaptation.
+
+### Fixed
+
+- **Dock Navigation**: Fixed anchor links to use absolute paths (`/${language}#section`) so navigation works correctly from any page, not just the homepage.
+
 ## [2025-12-26]
 
 ### Added

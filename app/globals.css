@@ -64,7 +64,7 @@ html {
 
 /* Notebook card container with dotted margins */
 .notebook-card {
-  background-color: #ffffff;
+  background-color: var(--background);
   border-radius: 0;
   box-shadow: none;
   position: relative;
@@ -79,11 +79,17 @@ html {
   top: 0;
   bottom: 0;
   width: calc((100vw - 800px) / 2);
-  background-color: #ffffff;
+  background-color: var(--background);
   background-image: radial-gradient(circle, rgba(180, 180, 180, 0.6) 1px, transparent 1px);
   background-size: 20px 20px;
   pointer-events: none;
   z-index: -1;
+}
+
+/* Dark mode dotted pattern */
+:is(.dark) .notebook-card::before,
+:is(.dark) .notebook-card::after {
+  background-image: radial-gradient(circle, rgba(100, 100, 100, 0.4) 1px, transparent 1px);
 }
 
 .notebook-card::before {
@@ -112,7 +118,8 @@ body {
 }
 
 body {
-  background-color: #ffffff;
+  background-color: var(--background);
+  color: var(--foreground);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
@@ -120,8 +127,8 @@ body {
 }
 
 ::selection {
-  background: #111111;
-  color: #ffffff;
+  background: var(--foreground);
+  color: var(--background);
 }
 
 @layer utilities {
@@ -136,26 +143,24 @@ body {
 
   .dock-container {
     @apply flex items-end gap-2 p-2.5 pb-2 bg-[#111111]/95 backdrop-blur-xl rounded-2xl shadow-2xl pointer-events-auto;
-    @apply max-md:gap-0 max-md:p-1.5 max-md:pb-1 max-md:rounded-xl;
+    @apply max-md:gap-0.5 max-md:p-1.5 max-md:pb-1 max-md:rounded-xl;
   }
 
   .dock-item {
     @apply flex flex-col items-center justify-end p-1.5 rounded-[10px] transition-all duration-200 no-underline gap-1 w-14 min-h-[32px];
     @apply hover:bg-white/10 hover:pb-1.5;
-    @apply max-md:p-2 max-md:w-11 max-md:min-w-[44px] max-md:min-h-[40px] max-md:shrink-0 max-[380px]:w-10 max-[380px]:min-w-[40px];
+    @apply max-md:p-1.5 max-md:w-9 max-md:min-w-[36px] max-md:min-h-[32px] max-md:shrink-0;
   }
 
   .dock-icon {
     @apply w-[18px] h-[18px] text-white/70 transition-all duration-200;
-    @apply max-md:w-5 max-md:h-5;
+    @apply max-md:w-4 max-md:h-4;
   }
 
-  /* Usamos selectores CSS para manejar el hover de los hijos de forma limpia */
   .dock-item:hover .dock-icon {
     @apply text-white -translate-y-0.5;
   }
 
-  /* En móvil quitamos el desplazamiento del icono */
   @media (max-width: 767px) {
     .dock-item:hover .dock-icon {
       @apply translate-y-0;
@@ -172,33 +177,33 @@ body {
 
   .dock-separator {
     @apply w-px h-7 bg-white/15 mx-1;
-    @apply max-md:h-6 max-md:mx-1;
+    @apply max-md:h-5 max-md:mx-0.5;
   }
 }
 
 @media (max-width: 480px) {
   .dock-container {
     gap: 1px;
-    padding: 6px 6px 4px;
+    padding: 5px 5px 3px;
   }
   .dock-item {
-    width: 36px;
-    min-width: 36px;
-    padding: 3px 4px;
+    width: 32px;
+    min-width: 32px;
+    padding: 4px;
   }
   .dock-icon {
     width: 14px;
     height: 14px;
   }
   .dock-separator {
-    height: 20px;
+    height: 16px;
     margin: 0 1px;
   }
 }
 
 /* Project Cards */
 .project-card {
-  background-color: white;
+  background-color: var(--card);
   border: 1px solid var(--border);
   padding: 1.25rem;
   border-radius: 1rem;
@@ -259,7 +264,7 @@ body {
   flex-direction: column;
   border-radius: 1rem;
   overflow: hidden;
-  background-color: white;
+  background-color: var(--card);
   border: 1px solid var(--border);
   text-decoration: none;
   transition:
@@ -355,6 +360,46 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   padding-bottom: 6rem;
+  position: relative;
+}
+
+/* Dotted margin areas for blog page - symmetric on both sides */
+.blog-page::before,
+.blog-page::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: calc((100vw - 1200px) / 2);
+  background-color: var(--background);
+  background-image: radial-gradient(circle, rgba(180, 180, 180, 0.6) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Dark mode dotted pattern for blog */
+:is(.dark) .blog-page::before,
+:is(.dark) .blog-page::after {
+  background-image: radial-gradient(circle, rgba(100, 100, 100, 0.4) 1px, transparent 1px);
+}
+
+.blog-page::before {
+  left: 0;
+  background-position: right center;
+}
+
+.blog-page::after {
+  right: 0;
+  background-position: left center;
+}
+
+/* Hide dots on smaller screens */
+@media (max-width: 1232px) {
+  .blog-page::before,
+  .blog-page::after {
+    display: none;
+  }
 }
 .blog-page-container {
   max-width: 1200px;
@@ -454,7 +499,7 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  background-color: white;
+  background-color: var(--background);
   color: var(--foreground);
   padding: 0.375rem 0.75rem;
   border-radius: 9999px;
@@ -532,7 +577,7 @@ body {
   }
 }
 .blog-post-card {
-  background-color: white;
+  background-color: var(--card);
   border-radius: 1rem;
   overflow: hidden;
   border: 1px solid var(--border);
@@ -612,6 +657,49 @@ body {
 }
 
 /* Blog Detail Page Styles */
+.blog-detail {
+  position: relative;
+}
+
+/* Dotted margin areas for blog detail page - symmetric on both sides */
+.blog-detail::before,
+.blog-detail::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: calc((100vw - 800px) / 2);
+  background-color: var(--background);
+  background-image: radial-gradient(circle, rgba(180, 180, 180, 0.6) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Dark mode dotted pattern for blog detail */
+:is(.dark) .blog-detail::before,
+:is(.dark) .blog-detail::after {
+  background-image: radial-gradient(circle, rgba(100, 100, 100, 0.4) 1px, transparent 1px);
+}
+
+.blog-detail::before {
+  left: 0;
+  background-position: right center;
+}
+
+.blog-detail::after {
+  right: 0;
+  background-position: left center;
+}
+
+/* Hide dots on smaller screens */
+@media (max-width: 832px) {
+  .blog-detail::before,
+  .blog-detail::after {
+    display: none;
+  }
+}
+
 .blog-detail-hero {
   position: relative;
   width: 100%;
@@ -1193,6 +1281,26 @@ body {
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+/* Dark mode component-specific adjustments (hover shadows, etc.) */
+.dark .blog-card-modern:hover {
+  box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.5);
+}
+
+.dark .blog-post-card:hover {
+  box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.4);
+}
+
+.dark .blog-detail-description {
+  border-left-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Dark mode button shadows */
+.dark .btn-primary {
+  box-shadow:
+    0 1px 3px 0 rgba(16, 185, 129, 0.4),
+    0 1px 2px 0 rgba(16, 185, 129, 0.3);
 }
 
 @layer base {

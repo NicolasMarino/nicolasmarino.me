@@ -27,7 +27,7 @@
     "title": "Experience",
     "items": {
       "conectandote": {
-        "role": "Co-founder & CTO",
+        "role": "Co-founder",
         "description": [
           "Leading the technical development and architecture of a platform connecting students with educational opportunities in Uruguay.",
           "Orchestrated a scalable infrastructure on AWS and developed core features for the platform."
@@ -126,5 +126,9 @@
   },
   "language": {
     "switch": "ES"
+  },
+  "theme": {
+    "light": "light",
+    "dark": "dark"
   }
 }

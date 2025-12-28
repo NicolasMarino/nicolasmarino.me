@@ -27,7 +27,7 @@
     "title": "Experiencia",
     "items": {
       "conectandote": {
-        "role": "Co-fundador & CTO",
+        "role": "Co-fundador",
         "description": [
           "Lidere el desarrollo técnico y la arquitectura de una plataforma que conecta estudiantes con oportunidades educativas en Uruguay.",
           "Orquesté una infraestructura escalable en AWS y desarrollé funcionalidades clave para la plataforma."
@@ -126,5 +126,9 @@
   },
   "language": {
     "switch": "EN"
+  },
+  "theme": {
+    "light": "claro",
+    "dark": "oscuro"
   }
 }

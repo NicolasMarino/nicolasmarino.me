@@ -3,6 +3,7 @@ import { Fira_Code } from 'next/font/google';
 import '../globals.css';
 import DockNavbar from '@/components/dock-navbar';
 import { LanguageProvider } from '@/lib/i18n/LanguageContext';
+import { ThemeProvider } from '@/components/theme-provider';
 
 const firaCode = Fira_Code({
   variable: '--font-fira-code',
@@ -63,12 +64,14 @@ export default async function RootLayout({
   const validLang = (['en', 'es'].includes(lang) ? lang : 'en') as 'en' | 'es';
 
   return (
-    <html lang={validLang} className={`${firaCode.variable}`}>
+    <html lang={validLang} className={`${firaCode.variable}`} suppressHydrationWarning>
       <body className="antialiased">
-        <LanguageProvider initialLanguage={validLang}>
-          {children}
-          <DockNavbar />
-        </LanguageProvider>
+        <ThemeProvider>
+          <LanguageProvider initialLanguage={validLang}>
+            {children}
+            <DockNavbar />
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

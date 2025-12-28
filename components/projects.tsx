@@ -9,10 +9,10 @@ export default function Projects() {
 
   return (
     <section id="projects">
-      <h2 className="text-3xl font-bold tracking-tight mb-4 section-title">
+      <h2 className="text-xl md:text-3xl font-bold tracking-tight mb-6 md:mb-8 section-title">
         {t('projects.title')}
       </h2>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2 lg:gap-8">
+      <div className="grid gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-2 lg:gap-8">
         {projects.map((project) => (
           <ProjectCard3D key={project.id} {...project} />
         ))}

@@ -22,7 +22,7 @@ export default async function BlogPost({
   }
 
   return (
-    <main className="min-h-screen bg-background text-foreground pb-16">
+    <main className="blog-detail min-h-screen bg-background text-foreground pb-16">
       <div className="relative w-full h-[300px] overflow-hidden md:h-[400px]">
         <Image
           src={post.image || '/images/blog-cover-default.png'}

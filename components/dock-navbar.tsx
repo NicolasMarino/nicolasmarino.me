@@ -7,17 +7,18 @@ import { SiGithub } from 'react-icons/si';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { siteConfig } from '@/config/site';
 import LanguageSwitcher from './language-switcher';
+import ThemeToggle from './theme-toggle';
 
 export default function DockNavbar() {
   const { t, language } = useLanguage();
 
   const navItems = [
     { href: `/${language}`, icon: Home, labelKey: 'nav.home' },
-    { href: '#about', icon: User, labelKey: 'nav.about' },
-    { href: '#experience', icon: Briefcase, labelKey: 'nav.experience' },
-    { href: '#projects', icon: FolderOpen, labelKey: 'nav.projects' },
+    { href: `/${language}#about`, icon: User, labelKey: 'nav.about' },
+    { href: `/${language}#experience`, icon: Briefcase, labelKey: 'nav.experience' },
+    { href: `/${language}#projects`, icon: FolderOpen, labelKey: 'nav.projects' },
     { href: `/${language}/blog`, icon: BookOpen, labelKey: 'nav.blog' },
-    { href: '#contact', icon: Mail, labelKey: 'nav.contact' },
+    { href: `/${language}#contact`, icon: Mail, labelKey: 'nav.contact' },
   ];
 
   const resumeUrl = language === 'es' ? '/cv/es.pdf' : '/cv/en.pdf';
@@ -68,6 +69,7 @@ export default function DockNavbar() {
 
         <div className="dock-separator" />
 
+        <ThemeToggle />
         <LanguageSwitcher />
       </div>
     </motion.nav>
