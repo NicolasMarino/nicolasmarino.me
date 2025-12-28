@@ -4,6 +4,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import { notFound } from 'next/navigation';
 import { BlogDetailHeader } from '@/components/blog/blog-detail-header';
 import { BlogDetailFooter } from '@/components/blog/blog-detail-footer';
+import { siteConfig } from '@/config/site';
 
 export async function generateStaticParams() {
   return getAllPostParams();
@@ -25,7 +26,7 @@ export default async function BlogPost({
     <main className="blog-detail min-h-screen bg-background text-foreground pb-16">
       <div className="relative w-full h-[300px] overflow-hidden md:h-[400px]">
         <Image
-          src={post.image || '/images/blog-cover-default.png'}
+          src={post.image || siteConfig.defaultBlogCover}
           alt={post.title}
           fill
           className="object-cover"

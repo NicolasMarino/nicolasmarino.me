@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { PostProps } from '@/types';
+import { siteConfig } from '@/config/site';
 
 export function FeaturedPost({ post }: PostProps) {
   const { t, language } = useLanguage();
@@ -14,7 +15,7 @@ export function FeaturedPost({ post }: PostProps) {
       <Link href={`/${language}/blog/${post.slug}`} className="blog-featured-link">
         <div className="blog-featured-image-wrapper">
           <Image
-            src={post.image || '/images/blog-cover-default.png'}
+            src={post.image || siteConfig.defaultBlogCover}
             alt={post.title}
             fill
             className="blog-featured-image"

@@ -11,16 +11,22 @@ All notable changes to this project will be documented in this file.
   - Created `ThemeProvider` and `ThemeToggle` components.
   - Added dark mode support for dotted background patterns.
   - Full dark mode styling for all components.
+- **Browser Compatibility**: Added `browserslist` configuration to `package.json` to target modern browsers and Firefox ESR.
 
 ### Changed
 
 - **Color Scheme**: Updated light mode background from pure white (#ffffff) to warm cream (#FAF8F5) for a softer, less harsh appearance.
 - **Blog Detail Layout**: Restructured to use `notebook-card` class for consistent dotted margins with the homepage.
 - **Hero Overlay**: Improved gradient overlay using `color-mix()` for proper light/dark mode adaptation.
+- **Centralized Blog Configuration**: Refactored all blog-related components and the library to use `siteConfig.defaultBlogCover`, centralizing asset management.
 
 ### Fixed
 
 - **Dock Navigation**: Fixed anchor links to use absolute paths (`/${language}#section`) so navigation works correctly from any page, not just the homepage.
+
+### Optimized
+
+- **Asset Management**: Migrated the default blog cover and avatar from the local `public` directory to Cloudflare R2.
 
 ## [2025-12-26]
 

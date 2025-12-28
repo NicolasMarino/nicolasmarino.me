@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { getPostSlugs, getPostBySlug, getAllPosts, getPostsByLanguage } from '@/lib/blog';
 import fs from 'fs';
 import matter from 'gray-matter';
+import { siteConfig } from '@/config/site';
 
 vi.mock('fs', () => ({
   default: {
@@ -105,7 +106,7 @@ describe('getPostBySlug', () => {
 
     const post = getPostBySlug('minimal');
 
-    expect(post?.image).toBe('/images/blog-cover-default.png');
+    expect(post?.image).toBe(siteConfig.defaultBlogCover);
     expect(post?.tags).toEqual([]);
     expect(post?.description).toBe('');
   });

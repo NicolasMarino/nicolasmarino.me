@@ -5,13 +5,13 @@ export const siteConfig = {
   github: 'https://github.com/nicolasmarino',
   linkedin: 'https://www.linkedin.com/in/nicol%C3%A1smarino/',
 
-  avatar: '/avatar.webp',
+  avatar: 'https://images.nicolasmarino.me/blog/avatar-1766962932077.webp',
 
   title: 'Nicolás Marino - Software Developer',
   description: 'Personal portfolio and blog of Nicolás Marino, a software developer.',
   url: 'https://nicolasmarino.me',
 
-  defaultBlogCover: '/images/blog-cover-default.png',
+  defaultBlogCover: 'https://images.nicolasmarino.me/blog/blog-cover-default-1766962889719.webp',
 } as const;
 
 export type SiteConfig = typeof siteConfig;

@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import type { Post } from '@/types';
 import { calculateReadingTime } from '@/lib/utils';
+import { siteConfig } from '@/config/site';
 
 const contentDirectory = path.join(process.cwd(), 'content/blog');
 
@@ -25,7 +26,7 @@ function getPostsFromDirectory(directory: string, language: 'es' | 'en'): Post[]
       date: data.date,
       description: data.description || data.excerpt || '',
       content,
-      image: data.image || '/images/blog-cover-default.png',
+      image: data.image || siteConfig.defaultBlogCover,
       readTime: calculateReadingTime(content),
       tags: data.tags || [],
       language,
@@ -60,7 +61,7 @@ export function getPostBySlug(slug: string, language?: 'es' | 'en'): Post | null
         date: data.date,
         description: data.description || data.excerpt || '',
         content,
-        image: data.image || '/images/blog-cover-default.png',
+        image: data.image || siteConfig.defaultBlogCover,
         readTime: calculateReadingTime(content),
         tags: data.tags || [],
         language: lang,
