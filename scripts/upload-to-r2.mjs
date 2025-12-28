@@ -38,7 +38,10 @@ async function processAndUpload(filePath) {
 
     console.log(`Processing: ${filePath}`);
 
-    const webpBuffer = await sharp(filePath).webp({ lossless: true, effort: 6 }).toBuffer();
+    const webpBuffer = await sharp(filePath)
+      .resize(1600, null, { withoutEnlargement: true }) // Cap width at 1600px
+      .webp({ quality: 80, effort: 6 })
+      .toBuffer();
 
     console.log(`Converted: ${webpFileName} (${(webpBuffer.length / 1024).toFixed(2)} KB)`);
 

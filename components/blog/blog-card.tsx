@@ -5,9 +5,17 @@ import Image from 'next/image';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { siteConfig } from '@/config/site';
 import { BlogCardProps } from '@/types';
+import { useSyncExternalStore } from 'react';
+
+const emptySubscribe = () => () => {};
 
 export function BlogCard({ post, priority = false, className = '' }: BlogCardProps) {
   const { t, language } = useLanguage();
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
   const dateLocale = language === 'es' ? 'es-ES' : 'en-US';
 
   return (
@@ -36,11 +44,13 @@ export function BlogCard({ post, priority = false, className = '' }: BlogCardPro
         <p className="blog-card-description">{post.description || t('blog.noDescription')}</p>
         <div className="blog-card-meta">
           <time dateTime={post.date}>
-            {new Date(post.date).toLocaleDateString(dateLocale, {
-              month: 'short',
-              day: 'numeric',
-              year: 'numeric',
-            })}
+            {mounted
+              ? new Date(post.date).toLocaleDateString(dateLocale, {
+                  month: 'short',
+                  day: 'numeric',
+                  year: 'numeric',
+                })
+              : '...'}
           </time>
           {post.readTime && (
             <>

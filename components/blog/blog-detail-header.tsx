@@ -4,9 +4,17 @@ import Link from 'next/link';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { PostProps } from '@/types';
 import { ChevronLeft, Calendar, Clock } from 'lucide-react';
+import { useSyncExternalStore } from 'react';
+
+const emptySubscribe = () => () => {};
 
 export function BlogDetailHeader({ post }: PostProps) {
   const { t, language } = useLanguage();
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
   const dateLocale = language === 'es' ? 'es-ES' : 'en-US';
 
   return (
@@ -32,11 +40,13 @@ export function BlogDetailHeader({ post }: PostProps) {
         <div className="blog-detail-meta">
           <time dateTime={post.date} className="blog-detail-meta-item">
             <Calendar className="blog-meta-icon" size={16} />
-            {new Date(post.date).toLocaleDateString(dateLocale, {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
+            {mounted
+              ? new Date(post.date).toLocaleDateString(dateLocale, {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })
+              : '...'}
           </time>
           <span className="blog-detail-meta-item">
             <Clock className="blog-meta-icon" size={16} />

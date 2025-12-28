@@ -65,6 +65,12 @@ export default async function RootLayout({
 
   return (
     <html lang={validLang} className={`${firaCode.variable}`} suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.vectorlogo.zone" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body className="antialiased">
         <ThemeProvider>
           <LanguageProvider initialLanguage={validLang}>

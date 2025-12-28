@@ -23,10 +23,12 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - **Dock Navigation**: Fixed anchor links to use absolute paths (`/${language}#section`) so navigation works correctly from any page, not just the homepage.
+- **Hydration Stability**: Implemented the `useSyncExternalStore` pattern in `ThemeToggle`, `Contact`, and Blog components to resolve React errors caused by date formatting and Cloudflare email obfuscation.
 
 ### Optimized
 
-- **Asset Management**: Migrated the default blog cover and avatar from the local `public` directory to Cloudflare R2.
+- **Asset Management**: Migrated the default blog cover and avatar from the local `public` directory to Cloudflare R2, achieving a **~98% reduction in asset size** (e.g., Avatar from 991KB to 29KB).
+- **Optimization Pipeline**: Switched R2 upload script to lossy WebP (quality: 80) and added 1600px width capping and preconnect hints for Lighthouse LCP (Largest Contentful Paint) improvement.
 
 ## [2025-12-26]
 

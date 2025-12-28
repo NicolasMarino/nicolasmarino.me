@@ -5,9 +5,17 @@ import Image from 'next/image';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { PostProps } from '@/types';
 import { siteConfig } from '@/config/site';
+import { useSyncExternalStore } from 'react';
+
+const emptySubscribe = () => () => {};
 
 export function FeaturedPost({ post }: PostProps) {
   const { t, language } = useLanguage();
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
   const dateLocale = language === 'es' ? 'es-ES' : 'en-US';
 
   return (
@@ -38,11 +46,13 @@ export function FeaturedPost({ post }: PostProps) {
           <p className="blog-featured-description">{post.description}</p>
           <div className="blog-featured-meta">
             <time dateTime={post.date}>
-              {new Date(post.date).toLocaleDateString(dateLocale, {
-                month: 'long',
-                day: 'numeric',
-                year: 'numeric',
-              })}
+              {mounted
+                ? new Date(post.date).toLocaleDateString(dateLocale, {
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric',
+                  })
+                : '...'}
             </time>
             <span className="blog-meta-separator">·</span>
             <span>

@@ -5,9 +5,19 @@ import { Mail, FileText } from 'lucide-react';
 import { SiGithub, SiLinkedin } from 'react-icons/si';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { siteConfig } from '@/config/site';
+import { useSyncExternalStore } from 'react';
+
+const emptySubscribe = () => () => {};
 
 export default function Contact() {
   const { t } = useLanguage();
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
+
+  const email = mounted ? siteConfig.email : '...';
 
   return (
     <section id="contact">
@@ -60,8 +70,8 @@ export default function Contact() {
         </Link>
         <span className="text-xs md:text-sm text-muted-foreground">
           {t('contact.orEmail')}{' '}
-          <Link href={`mailto:${siteConfig.email}`} className="text-primary hover:underline">
-            {siteConfig.email}
+          <Link href={`mailto:${email}`} className="text-primary hover:underline">
+            {email}
           </Link>
         </span>
       </div>

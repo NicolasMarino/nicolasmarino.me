@@ -79,17 +79,17 @@ html {
   top: 0;
   bottom: 0;
   width: calc((100vw - 800px) / 2);
-  background-color: var(--background);
-  background-image: radial-gradient(circle, rgba(180, 180, 180, 0.6) 1px, transparent 1px);
+  background-color: transparent;
+  background-image: radial-gradient(circle, rgba(180, 180, 180, 0.6) 1.5px, transparent 1.5px);
   background-size: 20px 20px;
   pointer-events: none;
-  z-index: -1;
+  z-index: 5;
 }
 
 /* Dark mode dotted pattern */
 :is(.dark) .notebook-card::before,
 :is(.dark) .notebook-card::after {
-  background-image: radial-gradient(circle, rgba(100, 100, 100, 0.4) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(100, 100, 100, 0.4) 1.5px, transparent 1.5px);
 }
 
 .notebook-card::before {
@@ -371,17 +371,17 @@ body {
   top: 0;
   bottom: 0;
   width: calc((100vw - 1200px) / 2);
-  background-color: var(--background);
-  background-image: radial-gradient(circle, rgba(180, 180, 180, 0.6) 1px, transparent 1px);
+  background-color: transparent;
+  background-image: radial-gradient(circle, rgba(180, 180, 180, 0.6) 1.5px, transparent 1.5px);
   background-size: 20px 20px;
   pointer-events: none;
-  z-index: -1;
+  z-index: 5;
 }
 
 /* Dark mode dotted pattern for blog */
 :is(.dark) .blog-page::before,
 :is(.dark) .blog-page::after {
-  background-image: radial-gradient(circle, rgba(100, 100, 100, 0.4) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(100, 100, 100, 0.4) 1.5px, transparent 1.5px);
 }
 
 .blog-page::before {
@@ -669,17 +669,17 @@ body {
   top: 0;
   bottom: 0;
   width: calc((100vw - 800px) / 2);
-  background-color: var(--background);
-  background-image: radial-gradient(circle, rgba(180, 180, 180, 0.6) 1px, transparent 1px);
+  background-color: transparent;
+  background-image: radial-gradient(circle, rgba(180, 180, 180, 0.6) 1.5px, transparent 1.5px);
   background-size: 20px 20px;
   pointer-events: none;
-  z-index: -1;
+  z-index: 5;
 }
 
 /* Dark mode dotted pattern for blog detail */
 :is(.dark) .blog-detail::before,
 :is(.dark) .blog-detail::after {
-  background-image: radial-gradient(circle, rgba(100, 100, 100, 0.4) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(100, 100, 100, 0.4) 1.5px, transparent 1.5px);
 }
 
 .blog-detail::before {
