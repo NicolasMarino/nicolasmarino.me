@@ -24,7 +24,7 @@ export default async function BlogPost({
 
   return (
     <main className="blog-detail min-h-screen bg-background text-foreground pb-16">
-      <div className="relative w-full h-[300px] overflow-hidden md:h-[400px]">
+      <div className="relative z-0 w-full h-[300px] overflow-hidden md:h-[400px]">
         <Image
           src={post.image || siteConfig.defaultBlogCover}
           alt={post.title}
@@ -32,10 +32,10 @@ export default async function BlogPost({
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-white/50 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-white via-white/40 to-transparent dark:from-background dark:via-background/40" />
       </div>
 
-      <div className="relative z-10 mx-auto -mt-32 max-w-3xl px-6">
+      <div className="relative z-20 mx-auto -mt-32 max-w-3xl px-6">
         <BlogDetailHeader post={post} />
 
         <hr className="my-16 border-t border-border" />
