@@ -25,7 +25,7 @@ const s3Client = new S3Client({
 
 const IMAGE_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.webp', '.avif', '.tiff'];
 
-async function processAndUpload(filePath) {
+async function processAndUpload(filePath, customWidth, customHeight) {
   try {
     const ext = path.extname(filePath).toLowerCase();
     if (!IMAGE_EXTENSIONS.includes(ext)) {
@@ -38,12 +38,21 @@ async function processAndUpload(filePath) {
 
     console.log(`Processing: ${filePath}`);
 
-    const webpBuffer = await sharp(filePath)
-      .resize(1600, null, { withoutEnlargement: true }) // Cap width at 1600px
-      .webp({ quality: 80, effort: 6 })
+    let sharpInstance = sharp(filePath);
+    
+    const width = customWidth ? parseInt(customWidth) : 1200;
+    const height = customHeight ? parseInt(customHeight) : null;
+
+    sharpInstance = sharpInstance.resize(width, height, {
+      withoutEnlargement: true,
+      fit: height ? 'cover' : 'inside'
+    });
+
+    const webpBuffer = await sharpInstance
+      .webp({ quality: 85, effort: 6 })
       .toBuffer();
 
-    console.log(`Converted: ${webpFileName} (${(webpBuffer.length / 1024).toFixed(2)} KB)`);
+    console.log(`Converted: ${webpFileName} (${(webpBuffer.length / 1024).toFixed(2)} KB) @ ${width}x${height || 'auto'}`);
 
     const uploadParams = {
       Bucket: R2_BUCKET_NAME,
@@ -63,10 +72,13 @@ async function processAndUpload(filePath) {
 }
 
 async function main() {
-  const targetPath = process.argv[2];
+  const args = process.argv.slice(2);
+  const targetPath = args[0];
+  const width = args[1];
+  const height = args[2];
 
   if (!targetPath) {
-    console.error('Usage: npm run upload <file_or_directory>');
+    console.error('Usage: npm run upload <file_or_directory> [width] [height]');
     process.exit(1);
   }
 
@@ -84,12 +96,12 @@ async function main() {
     for (const file of files) {
       const fullPath = path.join(targetPath, file);
       if (fs.statSync(fullPath).isFile()) {
-        const url = await processAndUpload(fullPath);
+        const url = await processAndUpload(fullPath, width, height);
         if (url) results.push({ name: file, url });
       }
     }
   } else {
-    const url = await processAndUpload(targetPath);
+    const url = await processAndUpload(targetPath, width, height);
     if (url) results.push({ name: path.basename(targetPath), url });
   }
 
