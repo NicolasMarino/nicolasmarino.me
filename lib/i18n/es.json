@@ -1,0 +1,134 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre mí",
+    "projects": "Proyectos",
+    "experience": "Experiencia",
+    "blog": "Blog",
+    "contact": "Contacto",
+    "github": "GitHub",
+    "resume": "Currículum"
+  },
+  "hero": {
+    "name": "Nicolás Marino",
+    "role": "Ingeniero de Software",
+    "flipWord1": "Simplificar",
+    "flipWord2": "Documentar",
+    "flipWord3": "Medir",
+    "cta": "Contáctame"
+  },
+  "about": {
+    "title": "Sobre mí",
+    "p1": "Desarrollador de software con más de 7 años de experiencia trabajando en la intersección entre el desarrollo backend y la ciencia de datos. Mi enfoque se basa en tres pilares: diseñar arquitecturas escalables, mantener una documentación clara y, sobre todo, medir el impacto real de cada funcionalidad en producción.",
+    "p2": "He trabajado en el desarrollo de APIs de alta concurrencia y en proyectos de Machine Learning, utilizando principalmente Python, Java y TypeScript. Creo firmemente que el valor del código no está solo en su ejecución, sino en su capacidad de generar insights y resolver problemas complejos de forma eficiente.",
+    "p3": "Como emprendedor, cofundé Conectándote (https://conectandote.com.uy/), plataforma en Uruguay que conecta a estudiantes con oportunidades educativas; y, a través de mi blog @Data For Everyone, difundo buenas prácticas y aprendizajes en Ciencia de Datos."
+  },
+  "experience": {
+    "title": "Experiencia",
+    "items": {
+      "conectandote": {
+        "role": "Co-fundador",
+        "description": [
+          "Lidere el desarrollo técnico y la arquitectura de una plataforma que conecta estudiantes con oportunidades educativas en Uruguay.",
+          "Orquesté una infraestructura escalable en AWS y desarrollé funcionalidades clave para la plataforma."
+        ],
+        "tags": ["Node.js", "AWS", "Vue", "PostgreSQL"]
+      },
+      "meli-senior": {
+        "role": "Ingeniero de Software Senior",
+        "description": [
+          "Creé un MCP en Python que agilizó los flujos de desarrollo interno con librerías propias.",
+          "Desarrollé un índice de productos para detectar ítems con alto potencial de mejora.",
+          "Automaticé 15+ procesos manuales recurrentes con n8n + BigQuery + APIs internas, liberando ~200 horas mensuales del equipo de Catálogo y mejorando el cumplimiento de SLAs.",
+          "Di varias charlas técnicas sobre IA, backend y datos en conferencias internas, con una audiencia total de ~250 desarrolladores."
+        ],
+        "tags": ["Python", "n8n", "BigQuery", "AI/ML"]
+      },
+      "meli-ssr": {
+        "role": "Ingeniero de Software Semi Senior",
+        "description": [
+          "Diseñé un sistema de detección de imágenes no conformes que eliminó 200.000+ imágenes de vendedores.",
+          "Optimicé pipelines en BigQuery, reduciendo tiempos de ejecución y ahorrando más de 80.000 USD en costos.",
+          "Construí dashboards que redujeron en un 40% el tiempo de priorización de productos.",
+          "Diseñé e implementé capas de abstracción en Java para acelerar la integración de capacidades de IA generativa.",
+          "Desarrollé un sistema de detección de duplicación de imágenes con OpenCLIP, procesando 150.000+ RPM y mejorando la precisión de matching en un 30%."
+        ],
+        "tags": ["Java", "BigQuery", "Generative AI", "OpenCLIP"]
+      },
+      "meli-analyst": {
+        "role": "Analista de Desarrollo de Software",
+        "description": [
+          "Mejoré métricas de calidad de catálogo en un 22% mediante soluciones de datos.",
+          "Construí reportes automatizados utilizados por más de 50 stakeholders de negocio.",
+          "Colaboré con el equipo de Search para mejorar la relevancia de ranking de productos, reduciendo resultados de baja calidad y aumentando en un 8% el CTR en categorías clave."
+        ],
+        "tags": ["SQL", "Search", "Data Analytics", "Product Strategy"]
+      },
+      "infocorp-ssr": {
+        "role": "Desarrollador Semi Senior",
+        "description": [
+          "Desarrollé módulos centrales para una aplicación de banca móvil en React Native usada por 30.000+ clientes.",
+          "Implementé componentes de UI responsivos junto al equipo de UX.",
+          "Participé en code reviews y mentoreé a desarrolladores junior."
+        ],
+        "tags": ["React Native", "Mobile", "UI/UX", "Mentoring"]
+      },
+      "infocorp-jr": {
+        "role": "Desarrollador Junior",
+        "description": [
+          "Desarrollé y mantuve plataformas de home banking para tres instituciones financieras líderes en LATAM."
+        ],
+        "tags": ["Java", ".NET", "Banking", "Maintenance"]
+      }
+    }
+  },
+  "projects": {
+    "title": "Proyectos",
+    "items": {
+      "conectandote": {
+        "title": "Conectándote",
+        "description": "Plataforma para ayudar a las personas a encontrar qué estudiar y descubrir oportunidades educativas.",
+        "tags": ["Node.js", "AWS", "TypeScript", "Vue"]
+      },
+      "dotfiles": {
+        "title": "Dot files",
+        "description": "Mis archivos de configuración personal, optimizados para la productividad en el desarrollo.",
+        "tags": ["Shell", "Lua", "Neovim"]
+      }
+    }
+  },
+  "contact": {
+    "title": "Contacto",
+    "description": "¡No dudes en contactarme!",
+    "sendMessage": "Enviar mensaje",
+    "downloadCV": "Descargar CV",
+    "cvPath": "/cv/es.pdf",
+    "cvFilename": "Nicolas-Marino-CV.pdf",
+    "orEmail": "o escríbeme a:",
+    "github": "GitHub",
+    "linkedin": "LinkedIn"
+  },
+  "blog": {
+    "title": "Blog @Data For Everyone",
+    "viewAll": "Ver todo →",
+    "minRead": "min. lectura",
+    "noDescription": "No hay descripción.",
+    "empty": "No hay entradas en el blog.",
+    "backToHome": "← Volver al inicio",
+    "backToBlog": "Volver al blog",
+    "subtitle": "Reflexiones, ideas y aprendizajes en el camino.",
+    "featured": "Destacado",
+    "moreArticles": "Más Artículos",
+    "readingTime": "min de lectura",
+    "share": "Compartir:",
+    "shareOnTwitter": "Compartir en Twitter",
+    "shareOnLinkedIn": "Compartir en LinkedIn"
+  },
+  "language": {
+    "switch": "EN"
+  },
+  "theme": {
+    "light": "claro",
+    "dark": "oscuro"
+  }
+}

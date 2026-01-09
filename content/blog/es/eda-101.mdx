@@ -1,0 +1,148 @@
+---
+title: 'Análisis Exploratorio de Datos 101'
+date: '2025-12-15'
+description: 'Guía introductoria al Análisis Exploratorio de Datos (EDA): qué es, por qué es importante, herramientas disponibles y un ejemplo práctico con Python.'
+tags: ['Data Science', 'EDA', 'Python', 'Pandas', 'Análisis de Datos']
+language: 'es'
+published: true
+---
+
+El análisis exploratorio de datos o EDA (E xploratory Data Analysis), es el proceso mediante el cual logramos entender los datos de nuestro set de datos. Y te preguntarás, ¿qué es entender los datos? Entendemos si podemos responder las siguientes preguntas: ¿Cómo están distribuidos?, ¿Existe alguna correlación entre ellos? ¿Existen anomalías? . Además se busca poder formular distintas hipótesis y verificar supuestos, esto nos permitirá generar distintos reportes para comunicar la situación actual de los datos.
+
+Para entender y poder responder las preguntas antes mencionadas, en ciertos casos tendremos que realizar una limpieza de los datos con el fin de estandarizar y realizar un correcto manejo de los distintos datos (nulos, anómalos, etc). Este post es introductorio y no incluirá una sección sobre limpieza de datos, haremos otro post dedicado enteramente a esto.
+
+## Herramientas
+
+Para esto existen muchas herramientas. Aquí hay una lista de algunas de las más utilizadas:
+
+- **Excel:** aunque no es una herramienta específica para análisis de datos, es utilizada para realizar operaciones básicas de estadística y gráficos, ideal para análisis rápidos y visualizaciones sencillas.
+- **Python:** lenguaje de programación utilizado para análisis de datos, cuenta con varias librerías como Pandas, Numpy, y Matplotlib.
+- **R:** lenguaje de programación utilizado en estadística y análisis de datos. Es muy popular por su capacidad para visualizar y analizar grandes cantidades de datos.
+- **Tableau:** herramienta de visualización de datos que permite crear dashboards y gráficos interactivos.
+
+Es importante tener en cuenta que cada herramienta tiene sus ventajas y desventajas. Además, el uso de buenas técnicas de visualización de datos es crucial para presentar los resultados de manera clara y concisa. Una visualización efectiva puede ayudar a identificar patrones y tendencias, siendo vital para comunicar los hallazgos a otros miembros del equipo o a stakeholders. Si bien existen numerosas herramientas para el análisis de datos, es esencial tener un buen conocimiento de estadística y matemáticas para garantizar un análisis efectivo.
+
+## Tu primer análisis exploratorio de datos
+
+En este apartado, te guiaremos a través de un ejemplo práctico de EDA, utilizando un conjunto de datos sobre estadísticas globales de YouTube. Para este análisis, utilizaremos la plataforma Kaggle, y puedes acceder al código completo a través de [este enlace](https://www.kaggle.com/code/nicolsmarino/eda-estad-sticas-globales-de-youtube/notebook).
+
+## **Variables**
+
+- **rank**: Posición del canal de YouTube basada en el número de suscriptores.
+- **video views**: Vistas totales acumuladas de todos los videos en el canal.
+- **category**: Categoría o nicho del canal.
+- **Title**: Título del canal de YouTube.
+- **uploads**: Número total de videos subidos al canal.
+- **Country**: País de origen del canal de YouTube.
+- **Abbreviation**: Abreviatura del país.
+- **channel_type**: Tipo de canal de YouTube (por ejemplo, individual, marca).
+- **video_views_rank**: Ranking del canal basado en las vistas totales de video.
+- **country_rank**: Ranking del canal basado en el número de suscriptores dentro de su país.
+- **channel_type_rank**: Ranking del canal basado en su tipo (individual o marca).
+- **video_views_for_the_last_30_days**: Vistas totales de video en los últimos 30 días.
+- **lowest_monthly_earnings**: Estimación más baja de ingresos mensuales del canal.
+- **highest_monthly_earnings**: Estimación más alta de ingresos mensuales del canal.
+- **lowest_yearly_earnings**: Estimación más baja de ingresos anuales del canal.
+- **highest_yearly_earnings**: Estimación más alta de ingresos anuales del canal.
+- **subscribers_for_last_30_days**: Número de nuevos suscriptores obtenidos en los últimos 30 días.
+- **created_month**: Mes en que se creó el canal de YouTube.
+- **created_date**: Fecha exacta de creación del canal de YouTube.
+- **Gross tertiary education enrollment (%)**: Porcentaje de la población inscrita en educación terciaria en el país.
+- **Population**: Población total del país.
+- **Unemployment** rate: Tasa de desempleo en el país.
+- **Urban_population**: Porcentaje de la población que vive en áreas urbanas.
+- **Latitude**: Coordenada de latitud de la ubicación del país.
+- **Longitude**: Coordenada de longitud de la ubicación del país.
+
+Vamos a comenzar leyendo el csv que tiene nuestro dataset con pandas, utilizando el método read_csv.
+
+```jsx
+df_yt_statistics = pd.read_csv("/kaggle/input/global-youtube-statistics-2023/Global YouTube Statistics.csv", encoding='ISO-8859-1')
+df_yt_statistics.head() # muestra las primeras 5 filas
+```
+
+![YouTube Statistics Head](https://images.nicolasmarino.me/blog/head-statistics-1766515904896.webp)
+
+![YouTube Statistics Info](https://images.nicolasmarino.me/blog/info-statistics-1766515905344.webp)
+
+![YouTube Statistics Describe](https://images.nicolasmarino.me/blog/describe-statistics-1766515904340.webp)
+
+Mediante la función _describe_ podemos visualizar como se distribuyen los datos de nuestro dataset por columna.
+
+- **count**: la cantidad de valores no nulos en cada columna.
+- **mean**: la media aritmética de los valores en cada columna.
+- **std**: la desviación estándar de los valores en cada columna.
+- **min**: el valor mínimo en cada columna.
+- **25%, 50%, 75%**: los percentiles 25, 50 (mediana) y 75 de los valores en cada columna.
+
+El percentil es un concepto estadístico que se utiliza para dividir un conjunto de datos en partes iguales o proporcionales. En otras palabras, los percentiles permiten identificar el valor por debajo del cual se encuentra un cierto porcentaje de los datos.
+
+Por ejemplo, el percentil 50 (también conocido como mediana) divide los datos en dos partes iguales: el 50% de los valores están por encima de la mediana y el 50% están por debajo. De manera similar, el percentil 25 (P25) indica el valor por debajo del cual se encuentra el 25% de los datos, y el percentil 75 (P75) indica el valor por debajo del cual se encuentra el 75% de los datos.
+
+Los percentiles son útiles para entender la distribución de los datos y analizar su dispersión. Por ejemplo, el percentil 75 puede ser considerado como el valor por encima del cual se encuentran los valores que son más altos que aproximadamente el 75% del conjunto de datos. Esto puede ser útil para identificar valores atípicos o para comparar la distribución de diferentes conjuntos de datos.
+
+- **max**: el valor máximo en cada columna.
+
+**Visualizaciones**
+
+**Cantidad de canales por categoría**
+
+![Canales por categoría](https://images.nicolasmarino.me/blog/channels-by-category-1766515903479.webp)
+
+**Cantidad de canales creados por año**
+
+![Canales por año](https://images.nicolasmarino.me/blog/created-by-year-1766515903915.webp)
+
+**¿Dónde están los YouTubers más seguidos del mundo?**
+
+![YouTubers más seguidos por país](https://images.nicolasmarino.me/blog/more-followed-1766515905806.webp)
+
+# **Anomalías**
+
+Al realizar un análisis exploratorio de datos es fundamental buscar si en el conjunto de datos sobre el cual estamos trabajando existen datos atípicos conocidos como outliers, dado que podría tener un impacto significativo sobre los análisis posteriores, pueden distorsionar distintas métricas. Es necesario entender si hubo un error en la medición de estos datos, si es un dato real pero poco frecuente, etc. y a partir de esto entender si tenemos que excluirlo de ciertos cálculos que realicemos sobre el dataset general y analizarlos individualmente para poder entender su naturaleza.
+
+En este caso podemos observar como hay canales creados en 1970... pero YouTube fue fundado en 2005, algo no hace sentido.
+
+### **Que canal fue creado en 1970?**
+
+![Canales creados en 1970](https://images.nicolasmarino.me/blog/1970-1766515902861.webp)
+
+# **Correlaciones**
+
+Explorar las correlaciones entre diferentes variables nos ayuda a entender mejor nuestros datos. Esta herramienta nos muestra si existe una relación entre dos variables, es decir, si un cambio en una variable puede estar vinculado a un cambio en otra.
+
+### **¿Correlación significa que una cosa causa la otra?**
+
+**No**, es fundamental saber que aunque dos variables estén correlacionadas, no significa que una cause la otra.
+
+### **¿Cómo lo vemos de manera visual?**
+
+Para ayudarnos a visualizar estas correlaciones, en este caso dado que son muchas variables las que tenemos y estamos haciendo un análisis exploratorio, utilizaremos un mapa de calor (conocido como heatmap en inglés), dependiendo la cantidad de variables que querramos analizar y los tipos de datos podríamos elegir otros métodos de visualización tales como: gráficos de pares (pairplot), diagramas de dispersión(scatter plot), entre otros.
+
+### **Conceptos generales**
+
+**Rango**: Es representado por (r) y varía entre -1 y 1.
+
+**Signo**:
+
+- **Positivo**: Si r es positivo indica una relación directa entre las variables, cuando una variable aumenta la otra tiende a aumentar.
+- **Negativo**: Si r es negativo indica una relación inversa, cuando una variable aumenta la otra tiende a disminuir.
+- **Neutro**: Si r es 0 indica que no hay una correlación lineal entre las variables pero no indica que no haya relación , podría existir una relación no lineal.
+
+Por defecto como estamos utilizando la librería pandas de python, vamos a calcular el [coeficiente de correlación de Pearson](https://es.wikipedia.org/wiki/Coeficiente_de_correlaci%C3%B3n_de_Pearson), además solo haremos este análisis sobre variables de tipo numérico y se excluyen por defecto los valores nulos.
+
+![EDA Heatmap](https://images.nicolasmarino.me/blog/eda-101-heatmap-1766515394091.webp)
+
+### **Conclusiones sobre el heatmap:**
+
+- Se puede observar una correlación positiva fuerte entre video views y subscribers, hace sentido que a mas subscribers mas vistas y a su vez a mas vistas, mas subscriptores.
+- Existe una relación débil entre la cantidad de videos subidos (uploads) y las estimaciones de ingresos, tanto mensuales como anuales (ya sean los más bajos o los más altos). Esto sugiere que, aunque un canal pueda subir muchos videos, eso no garantiza por sí solo que vaya a tener ingresos significativamente más altos. Es decir, la simple cantidad de contenido no es un predictor fuerte de los ingresos del canal.
+- Al observar la relación entre el número de suscriptores (subscribers) y la cantidad de videos subidos (uploads), encontramos una tendencia similar. Aunque hay una relación positiva, es débil. Esto indica que simplemente subir más videos no garantiza un aumento proporcional en el número de suscriptores. Sin embargo, es importante señalar que, aunque la relación es débil, sigue siendo positiva, lo que significa que hay cierta tendencia a ganar más suscriptores a medida que se suben más videos, pero no es una relación directa y fuerte.
+
+Hay muchas más relaciones y patrones en los datos que podríamos analizar, pero por ahora no entraremos en detalle sobre cada una de ellas. Nos hemos centrado en unas pocas para entender el concepto y como podemos interpretar un heatmap.
+
+## Resumen
+
+Hemos cubierto qué es el análisis exploratorio de datos, conceptos generales y herramientas, pasando directamente a distintas herramientas con las cuales podemos hacer un EDA para finalizar con tu primer análisis exploratorio de datos.
+
+Como mencionamos anteriormente esto es una introducción y se puede profundizar en varios de los puntos mencionados anteriormente, entre ellos, la limpieza de datos, los distintos tipos de visualizaciones, el análisis estadístico que podemos realizar sobre las distintas variables, entre otros.
